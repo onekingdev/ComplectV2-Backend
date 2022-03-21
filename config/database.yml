@@ -8,7 +8,7 @@ default: &default
 
 development:
   <<: *default
-  database: complect
+  database: complect_development
 
 test:
   <<: *default
