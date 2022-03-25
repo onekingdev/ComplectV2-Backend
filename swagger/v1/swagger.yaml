@@ -1,0 +1,55 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/csv":
+    post:
+      summary: Generate CSV
+      tags:
+      - CSV
+      parameters: []
+      responses:
+        '201':
+          description: csv generated
+        '422':
+          description: csv generated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filename:
+                  type: string
+              required:
+              - filename
+  "/api/pdf":
+    post:
+      summary: Generate PDF
+      tags:
+      - PDF
+      parameters: []
+      responses:
+        '201':
+          description: pdf generated
+        '422':
+          description: error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filename:
+                  type: string
+                template:
+                  type: string
+              required:
+              - filename
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

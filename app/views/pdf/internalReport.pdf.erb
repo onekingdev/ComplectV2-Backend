@@ -1,0 +1,1222 @@
+<html>
+  <head>
+	<style type="text/css">
+	  @font-face {
+		font-family: 'Public Sans';
+		font-style: normal;
+		font-weight: 300;
+		src: url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;300;400;600;700&family=Varela&display=swap")
+	  }
+	  body {
+		-webkit-print-color-adjust: exact !important;
+	  }
+	  @page {
+		  margin-top: 50px;
+		  margin-bottom: 50px;
+		  -webkit-print-color-adjust: exact !important;
+		  overflow: visible;
+		  @bottom-left {
+		 	content: counter(page);
+		  }
+	  }
+	  @page:first{
+		  margin: 0px;
+	  }
+	  .page {
+		width: 273mm;
+		position: relative;
+		clear: both;
+	  }
+	  :root {
+		--blue: #007bff;
+		--indigo: #6610f2;
+		--purple: #6f42c1;
+		--pink: #e83e8c;
+		--red: #dc3545;
+		--orange: #fd7e14;
+		--yellow: #ffc107;
+		--green: #28a745;
+		--teal: #20c997;
+		--cyan: #17a2b8;
+		--white: #fff;
+		--gray: #6c757d;
+		--gray-dark: #343a40;
+		--primary: #007bff;
+		--secondary: #6c757d;
+		--success: #28a745;
+		--info: #17a2b8;
+		--warning: #ffc107;
+		--danger: #dc3545;
+		--light: #f8f9fa;
+		--dark: #343a40;
+		--breakpoint-xs: 0;
+		--breakpoint-sm: 576px;
+
+		--breakpoint-md: 768px;
+		--breakpoint-lg: 992px;
+		--breakpoint-xl: 1200px;
+		--font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	  }
+
+	  /* line 19, node_modules/bootstrap/scss/_reboot.scss */
+	  *,
+	  *::before,
+	  *::after {
+		box-sizing: border-box;
+	  }
+
+	  /* line 25, node_modules/bootstrap/scss/_reboot.scss */
+	  html {
+		font-family: sans-serif;
+		line-height: 1.15;
+		-webkit-text-size-adjust: 100%;
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	  }
+
+	  /* line 46, node_modules/bootstrap/scss/_reboot.scss */
+	  body {
+		margin: 0;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #212529;
+		text-align: left;
+		background-color: #fff;
+	  }
+
+	  /* line 92, node_modules/bootstrap/scss/_reboot.scss */
+	  h1,
+	  h2,
+	  h3,
+	  h4,
+	  h5,
+	  h6 {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+	  }
+
+	  /* line 101, node_modules/bootstrap/scss/_reboot.scss */
+	  p {
+		margin-top: 0;
+		margin-bottom: 1rem;
+	  }
+
+	  /* line 156, node_modules/bootstrap/scss/_reboot.scss */
+	  b,
+	  strong {
+		font-weight: bolder;
+	  }
+
+	  /* line 161, node_modules/bootstrap/scss/_reboot.scss */
+	  small {
+		font-size: 80%;
+	  }
+
+	  /* line 252, node_modules/bootstrap/scss/_reboot.scss */
+	  img {
+		vertical-align: middle;
+		border-style: none;
+	  }
+
+	  /* line 257, node_modules/bootstrap/scss/_reboot.scss */
+	  svg {
+		overflow: hidden;
+		vertical-align: middle;
+	  }
+
+	  /* line 296, node_modules/bootstrap/scss/_reboot.scss */
+	  label {
+		display: inline-block;
+		margin-bottom: 0.5rem;
+	  }
+
+	  /* line 305, node_modules/bootstrap/scss/_reboot.scss */
+	  button {
+		border-radius: 0;
+	  }
+
+	  /* line 314, node_modules/bootstrap/scss/_reboot.scss */
+	  /* line 319, node_modules/bootstrap/scss/_reboot.scss */
+	  input,
+	  button,
+	  select,
+	  optgroup,
+	  textarea {
+		margin: 0;
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+	  }
+
+	  /* line 386, node_modules/bootstrap/scss/_reboot.scss */
+	  input[type="radio"],
+	  input[type="checkbox"] {
+		box-sizing: border-box;
+		padding: 0;
+	  }
+
+	  /* line 393, node_modules/bootstrap/scss/_reboot.scss */
+	  textarea {
+		overflow: auto;
+		resize: vertical;
+	  }
+
+	  /* line 7, node_modules/bootstrap/scss/_type.scss */
+	  h1,
+	  h2,
+	  h3,
+	  h4,
+	  h5,
+	  h6,
+	  .h1,
+	  .h2,
+	  .h3,
+	  .h4,
+	  .h5,
+	  .h6 {
+		margin-bottom: 0.5rem;
+		font-weight: 500;
+		line-height: 1.2;
+	  }
+
+	  /* line 16, node_modules/bootstrap/scss/_type.scss */
+	  h1,
+	  .h1 {
+		font-size: 2.5rem;
+	  }
+
+	  /* line 17, node_modules/bootstrap/scss/_type.scss */
+	  h2,
+	  .h2 {
+		font-size: 2rem;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/_type.scss */
+	  h3,
+	  .h3 {
+		font-size: 1.75rem;
+	  }
+
+	  /* line 19, node_modules/bootstrap/scss/_type.scss */
+	  h4,
+	  .h4 {
+		font-size: 1.5rem;
+	  }
+
+	  /* line 20, node_modules/bootstrap/scss/_type.scss */
+	  h5,
+	  .h5 {
+		font-size: 1.25rem;
+	  }
+
+	  /* line 49, node_modules/bootstrap/scss/_grid.scss */
+	  .row {
+		display: flex;
+		flex-wrap: wrap;
+		margin-right: -15px;
+		margin-left: -15px;
+	  }
+
+	  .row::after {
+		content: '';
+		display: block;
+		clear: both;
+	  }
+
+	  /* line 8, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-md,
+	  .col-md-auto,
+	  .col-md-12,
+	  .col-md-11,
+	  .col-md-10,
+	  .col-md-9,
+	  .col-md-8,
+	  .col-md-7,
+	  .col-md-6,
+	  .col-md-5,
+	  .col-md-4,
+	  .col-md-3,
+	  .col-md-2,
+	  .col-md-1,
+	  .col-sm,
+	  .col-sm-auto,
+	  .col-sm-12,
+	  .col-sm-11,
+	  .col-sm-10,
+	  .col-sm-9,
+	  .col-sm-8,
+	  .col-sm-7,
+	  .col-sm-6,
+	  .col-sm-5,
+	  .col-sm-4,
+	  .col-sm-3,
+	  .col-sm-2,
+	  .col-sm-1,
+	  .col,
+	  .col-auto,
+	  .col-12,
+	  .col-11,
+	  .col-10,
+	  .col-9,
+	  .col-8,
+	  .col-7,
+	  .col-6,
+	  .col-5,
+	  .col-4,
+	  .col-3,
+	  .col-2,
+	  .col-1 {
+		position: relative;
+		width: 100%;
+		padding-right: 15px;
+		padding-left: 15px;
+		float: left;
+	  }
+
+	  /* line 33, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col {
+		flex-basis: 0;
+		flex-grow: 1;
+		max-width: 100%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-1 {
+		flex: 0 0 8.3333333333%;
+		max-width: 8.3333333333%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-2 {
+		flex: 0 0 16.6666666667%;
+		max-width: 16.6666666667%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-3 {
+		flex: 0 0 25%;
+		max-width: 25%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-4 {
+		flex: 0 0 33.3333333333%;
+		max-width: 33.3333333333%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-5 {
+		flex: 0 0 41.6666666667%;
+		max-width: 41.6666666667%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-6 {
+		flex: 0 0 50%;
+		max-width: 50%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-7 {
+		flex: 0 0 58.3333333333%;
+		max-width: 58.3333333333%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-8 {
+		flex: 0 0 66.6666666667%;
+		max-width: 66.6666666667%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-9 {
+		flex: 0 0 75%;
+		max-width: 75%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-10 {
+		flex: 0 0 83.3333333333%;
+		max-width: 83.3333333333%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-11 {
+		flex: 0 0 91.6666666667%;
+		max-width: 91.6666666667%;
+	  }
+
+	  /* line 53, node_modules/bootstrap/scss/mixins/_grid-framework.scss */
+	  .col-12 {
+		flex: 0 0 100%;
+		max-width: 100%;
+	  }
+
+	  /* line 7, node_modules/bootstrap/scss/_forms.scss */
+	  .form-control {
+		display: block;
+		width: 100%;
+		height: calc(1.5em + 0.75rem + 2px);
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	  }
+
+	  /* line 7, node_modules/bootstrap/scss/_buttons.scss */
+	  .btn {
+		display: inline-block;
+		font-weight: 400;
+		color: #212529;
+		text-align: center;
+		vertical-align: middle;
+		user-select: none;
+		background-color: transparent;
+		border: 1px solid transparent;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		border-radius: 0.25rem;
+		transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	  }
+
+	  .btn-primary {
+		color: #fff;
+		background-color: #007bff;
+		border-color: #007bff;
+	  }
+
+	  .btn-secondary {
+		color: #fff;
+		background-color: #6c757d;
+		border-color: #6c757d;
+	  }
+
+	  /* line 7, node_modules/bootstrap/scss/_input-group.scss */
+	  .input-group {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
+		width: 100%;
+	  }
+
+	  /* line 14, node_modules/bootstrap/scss/_input-group.scss */
+	  .input-group>.form-control,
+	  .input-group>.form-control-plaintext,
+	  .input-group>.custom-select,
+	  .input-group>.custom-file {
+		position: relative;
+		width: 100%;
+		min-width: 0;
+		margin-bottom: 0;
+	  }
+
+	  /* line 75, node_modules/bootstrap/scss/_input-group.scss */
+	  /* line 31, node_modules/bootstrap/scss/_card.scss */
+	  /* line 45, node_modules/bootstrap/scss/_card.scss */
+	  .card-body {
+		flex: 1 1 auto;
+		min-height: 1px;
+		padding: 1.25rem;
+	  }
+
+	  /* line 7, node_modules/bootstrap/scss/utilities/_float.scss */
+	  .float-left {
+		float: left !important;
+	  }
+
+	  /* line 8, node_modules/bootstrap/scss/utilities/_float.scss */
+	  .float-right {
+		float: right !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .m-0 {
+		margin: 0 !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mt-0,
+	  .my-0 {
+		margin-top: 0 !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mr-0,
+	  .mx-0 {
+		margin-right: 0 !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mb-0,
+	  .my-0 {
+		margin-bottom: 0 !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .ml-0,
+	  .mx-0 {
+		margin-left: 0 !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .m-1 {
+		margin: 0.25rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mt-1,
+	  .my-1 {
+		margin-top: 0.25rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mr-1,
+	  .mx-1 {
+		margin-right: 0.25rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mb-1,
+	  .my-1 {
+		margin-bottom: 0.25rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .ml-1,
+	  .mx-1 {
+		margin-left: 0.25rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .m-2 {
+		margin: 0.5rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mt-2,
+	  .my-2 {
+		margin-top: 0.5rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mr-2,
+	  .mx-2 {
+		margin-right: 0.5rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mb-2,
+	  .my-2 {
+		margin-bottom: 0.5rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .ml-2,
+	  .mx-2 {
+		margin-left: 0.5rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .m-3 {
+		margin: 1rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mt-3,
+	  .my-3 {
+		margin-top: 1rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mr-3,
+	  .mx-3 {
+		margin-right: 1rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mb-3,
+	  .my-3 {
+		margin-bottom: 1rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .ml-3,
+	  .mx-3 {
+		margin-left: 1rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .m-4 {
+		margin: 1.5rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mt-4,
+	  .my-4 {
+		margin-top: 1.5rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mr-4,
+	  .mx-4 {
+		margin-right: 1.5rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mb-4,
+	  .my-4 {
+		margin-bottom: 1.5rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .ml-4,
+	  .mx-4 {
+		margin-left: 1.5rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .m-5 {
+		margin: 3rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mt-5,
+	  .my-5 {
+		margin-top: 3rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mr-5,
+	  .mx-5 {
+		margin-right: 3rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .mb-5,
+	  .my-5 {
+		margin-bottom: 3rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .ml-5,
+	  .mx-5 {
+		margin-left: 3rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .p-0 {
+		padding: 0 !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pt-0,
+	  .py-0 {
+		padding-top: 0 !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pr-0,
+	  .px-0 {
+		padding-right: 0 !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pb-0,
+	  .py-0 {
+		padding-bottom: 0 !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pl-0,
+	  .px-0 {
+		padding-left: 0 !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .p-1 {
+		padding: 0.25rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pt-1,
+	  .py-1 {
+		padding-top: 0.25rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pr-1,
+	  .px-1 {
+		padding-right: 0.25rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pb-1,
+	  .py-1 {
+		padding-bottom: 0.25rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pl-1,
+	  .px-1 {
+		padding-left: 0.25rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .p-2 {
+		padding: 0.5rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pt-2,
+	  .py-2 {
+		padding-top: 0.5rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pr-2,
+	  .px-2 {
+		padding-right: 0.5rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pb-2,
+	  .py-2 {
+		padding-bottom: 0.5rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pl-2,
+	  .px-2 {
+		padding-left: 0.5rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .p-3 {
+		padding: 1rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pt-3,
+	  .py-3 {
+		padding-top: 1rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pr-3,
+	  .px-3 {
+		padding-right: 1rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pb-3,
+	  .py-3 {
+		padding-bottom: 1rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pl-3,
+	  .px-3 {
+		padding-left: 1rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .p-4 {
+		padding: 1.5rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pt-4,
+	  .py-4 {
+		padding-top: 1.5rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pr-4,
+	  .px-4 {
+		padding-right: 1.5rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pb-4,
+	  .py-4 {
+		padding-bottom: 1.5rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pl-4,
+	  .px-4 {
+		padding-left: 1.5rem !important;
+	  }
+
+	  /* line 11, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .p-5 {
+		padding: 3rem !important;
+	  }
+
+	  /* line 12, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pt-5,
+	  .py-5 {
+		padding-top: 3rem !important;
+	  }
+
+	  /* line 15, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pr-5,
+	  .px-5 {
+		padding-right: 3rem !important;
+	  }
+
+	  /* line 18, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pb-5,
+	  .py-5 {
+		padding-bottom: 3rem !important;
+	  }
+
+	  /* line 21, node_modules/bootstrap/scss/utilities/_spacing.scss */
+	  .pl-5,
+	  .px-5 {
+		padding-left: 3rem !important;
+	  }
+
+	  /* line 2, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-y-1 {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	  }
+
+	  /* line 3, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-y-2 {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	  }
+
+	  /* line 4, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-y-3 {
+		margin-top: 3rem;
+		margin-bottom: 3rem;
+	  }
+
+	  /* line 12, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-t-1 {
+		margin-top: 1rem;
+	  }
+
+	  /* line 13, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-t-2 {
+		margin-top: 2rem;
+	  }
+
+	  /* line 14, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-t-3 {
+		margin-top: 3rem;
+	  }
+
+	  /* line 21, app/assets/stylesheets/_vue_utilities.scss */
+	  .m-b-1 {
+		margin-bottom: 1rem;
+	  }
+
+	  #app,
+	  body,
+	  html {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		-webkit-font-smoothing: antialiased;
+	  }
+
+	  /* line 60, app/assets/stylesheets/vue.scss */
+	  body,
+	  html {
+		margin: 0;
+		padding: 0;
+		font-family: 'Public Sans', sans-serif !important;
+		font-weight: 400;
+	  }
+
+	  /* line 78, app/assets/stylesheets/vue.scss */
+	  html {
+		background-color: #F6F6F8;
+	  }
+
+	  /* line 91, app/assets/stylesheets/vue.scss */
+	  input,
+	  button,
+	  select,
+	  optgroup,
+	  textarea {
+		font-family: inherit;
+	  }
+
+	  /* ---------- BUTTONS ---------- */
+	  /* line 1028, app/assets/stylesheets/vue.scss */
+	  .btn {
+		font-size: 0.875rem;
+		font-weight: 700;
+	  }
+
+	  .btn-group,
+	  .btn-group-vertical {
+		position: relative;
+		display: inline-flex;
+		vertical-align: middle;
+	  }
+
+	  .input-group-append {
+		margin-left: -1px;
+	  }
+
+	  .btn-group,
+	  .btn-group-vertical {
+		position: relative;
+		display: inline-flex;
+		vertical-align: middle;
+	  }
+
+	  /* line 1078, app/assets/stylesheets/vue.scss */
+	  .btn.btn-primary,
+	  .btn.btn-dark {
+		color: #fff;
+		background-color: #303132;
+		border-color: #303132;
+	  }
+
+	  /* line 1091, app/assets/stylesheets/vue.scss */
+	  .btn.btn-default {
+		border-color: #DCDEE4 !important;
+	  }
+
+	  /* line 1095, app/assets/stylesheets/vue.scss */
+	  .btn.btn-secondary {
+		color: #343a40;
+		background-color: #fff;
+		border-color: #DCDEE4;
+	  }
+
+	  /* line 1139, app/assets/stylesheets/vue.scss */
+	  .reviews__card {
+		border-radius: 4px;
+		border: 1px solid #DCDEE4;
+	  }
+
+	  /* line 2865, app/assets/stylesheets/vue.scss */
+	  .reviews__card--internal {
+		margin-top: 100px;
+		position: relative;
+	  }
+
+	  /* line 2874, app/assets/stylesheets/vue.scss */
+	  .reviews__card--internal h3 {
+		margin-bottom: 50px;
+		font-size: 1.25rem;
+		font-weight: 400;
+	  }
+
+	  /* line 2880, app/assets/stylesheets/vue.scss */
+	  .reviews__card--internal h4 {
+		margin-bottom: 0.625rem;
+		font-size: 1.25rem;
+		font-weight: 600;
+	  }
+
+	  /* ---------- FORMS---------- */
+	  /* line 3007, app/assets/stylesheets/vue.scss */
+	  .form-label {
+		margin-bottom: 0.3125rem;
+		font-size: 0.875rem;
+		color: #797B7E;
+	  }
+
+	  textarea.form-control {
+		height: auto;
+	  }
+
+	  /* line 3037, app/assets/stylesheets/vue.scss */
+	  .form-control {
+		padding: 0.4375rem 0.625rem;
+		font-size: 0.875rem;
+		color: #303132;
+		border-color: #DCDEE4;
+	  }
+
+	  .content {
+		border: 1px solid #ccc;
+		padding: 5px 12px;
+	  }
+
+	  .btn-group,
+	  .btn-group-vertical {
+		position: relative;
+		display: inline-flex;
+		vertical-align: middle;
+	  }
+
+	  .width-90 {
+		width: 90% !important;
+	  }
+
+	  .datetime-icon {
+		padding: 10px;
+	  }
+
+	  .m-b-2 {
+		margin-bottom: 2rem;
+	  }
+
+	  .circle {
+		  border-radius: 50%;
+		  
+	  }
+
+	  .break-page {
+		page-break-after: always;
+	  }
+
+	  .first-page {
+		  background-image:  url('data:image/png;base64,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') !important;
+		  background-size: cover;
+	  }
+
+	  .progress-bar {
+		  overflow: auto;
+		  margin-top: 50px;
+		  border-top: 1px solid orange;
+		  padding-left: 20px;
+	  }
+	  .progress-bar .percent {
+		transform: skewX(20deg);
+		float: left;
+		background: orange;
+		padding-left: 10px;
+		font-size: 1.25rem;
+	  }
+	  .progress-bar .percent::before {
+		content: ' ';
+		position: absolute;
+		top: 0;
+		left: -10px;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 10px solid #fff;
+	  }
+	  .progress-bar .percent::after {
+		content: ' ';
+		position: absolute;
+		bottom: -1px;
+		right: -10px;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-bottom: 10px solid #fff;
+	  }
+	  .progress-bar .percent div {
+		transform: skewX(-20deg);
+	  }
+	  .category-number {
+		position: absolute;
+		width: 70px;
+		height: 70px;
+		left: -80px;
+		top: 0px;
+		background-color: white;
+	  }
+	  .category-number h3{
+		  margin-top: 10px;
+		  background-color: #5f62ac;
+		  width: 50px;
+		  height: 50px;
+		  color: white;
+		  padding-top: 13px;
+	  }
+	  .category-item {
+		  border-bottom: 1px solid blue;
+		  margin-top: 20px;
+	  }
+	  .category-item img{
+		  margin-left: 9px;
+		  margin-right: 9px;
+		  vertical-align: top;
+	  }
+	  .category-item label{
+		  width: calc(100% - 60px);
+	  }
+	  .category-item p {
+		  padding-left: 50px;
+	  }
+	  @media print {
+        .header-space,
+        .footer-space {
+            height: 150px;
+            font-weight: bold;
+            width: 100%;
+            padding: 10pt;
+            margin: 10pt 0;
+        }
+        
+      }
+	  .header-space,
+        .footer-space {
+            height: 150px;
+            font-weight: bold;
+            width: 100%;
+            padding: 10pt;
+            margin: 10pt 0;
+        }
+
+	</style>
+	<meta charset="UTF-8">
+  </head>
+  <body>
+	<div class="container break-page first-page" style="color: white; height: 1468px;">
+		<h1 style="padding-left: 50px; padding-top: 500px; width: 200px; margin-bottom: 0px;"><big><strong>Internal Review Name</strong></big></h1>
+		<h2 style="padding-left: 50px; margin-top: 50px;">Business Name</h2>
+		<h3 style="font-weight: 900; margin-top: 600px; text-align: right;  padding-right: 50px;">{{ internal_date }}</h3>
+	</div>
+	<table class="break-page">
+        <!-- <thead><tr><td>
+            <div class="header-space">&nbsp;</div>
+        </td></tr></thead> -->
+        <tbody><tr><td>
+			<div class="container page break-page" style="padding-left: 200px; padding-top: 100px;">
+				<div class="card-body pt-0" style="border: 0; border-left: 5px dotted black; padding-left: 50px;">
+				  <div class="reviews__card--internal">
+					  <h2><b>REVIEW PERIOD</b></h3>
+					  <h2><b>{{ startsAt }} - {{ endsAt }}</b></h3>
+				  </div>
+				  <div class="reviews__card--internal">
+					  <h3><b>Material Business Changes</b></h3>
+					  {{#if businessChanges includeZero=true}}
+					  <p>There were no material business changes</p>
+					  {{else}}
+					  <p>{{ businessChanges }}</p>
+					  {{/if}}
+				  </div>
+				  <div class="reviews__card--internal">
+					  <h3><b>Material Regulatory Changes</b></h3>
+					  {{#if regulatoryChanges.length}}
+						{{#each regulatoryChanges}}
+						<p>[Change] {{ this.change }}</p>
+						<p>[Response] {{ this.response }}</p>
+						{{/each}}
+					  {{else}}
+						<p>There were no material business changes.</p>
+						<p>There is no seperate paragraph for response.</p>
+					  {{/if}}
+					  
+				  </div>
+				  <div class="reviews__card--internal">
+					  <h3><b>Key Employees Interviewed</b></h3>
+					  <table width="100%">
+						  {{#each employeesInterviewed}}
+						  <tr>
+							  <td><p>{{ this.name }}</p></td>
+							  <td><p>{{ this.title }}</p></td>
+							  <td><p>{{ this.department }}</p></td>
+						  </tr>
+						  {{/each}}
+					  </table>
+				  </div>
+			  </div>
+		  </div>
+		</td></tr></tbody>
+		<!-- <tfoot><tr><td>
+            <div class="footer-space">&nbsp;</div>
+        </td></tr></tfoot> -->
+    </table>
+	<table class="break-page">
+        <!-- <thead><tr><td>
+            <div class="header-space">&nbsp;</div>
+        </td></tr></thead> -->
+        <tbody><tr><td>
+		  <div class="container page break-page" style="padding-left: 100px; padding-top: 100px;">
+			  <h2><b>AT A GLANCE</b></h2>
+			  <div class="reviews__card--internal">
+				  <div class="col-4" style="text-align: center;">
+					  <h3><b>Categories</b></h3>
+					  <h1 class="circle" style="background-color: #5f62ac !important; width: 150px; height: 150px; color: white; padding-top: 55px; display: inline-block;">{{ category_count }}</h1>
+				  </div>
+				  <div class="col-4" style="text-align: center;">
+					  <h3><b>Categories</b></h3>
+					  <h1 class="circle" style="background-color: #5f62ac !important; width: 150px; height: 150px; color: white; padding-top: 55px; display: inline-block;"> {{ topic_count }} </h1>
+				  </div>
+				  <div class="col-4" style="text-align: center;">
+					  <h3><b>Categories</b></h3>
+					  <h1 class="circle" style="background-color: #5f62ac !important; width: 150px; height: 150px; color: white; padding-top: 55px; display: inline-block;"> {{ item_count }} </h1>
+				  </div>
+			  </div>
+			  <div class="reviews__card--internal">
+				  <p>Categories are macro review areas</p>
+				  <p>Topics are more defined section within a category</p>
+				  <p>Items are granular, defined issues reviewed within a topic</p>
+			  </div>
+			  <div class="reviews__card--internal">
+				  <h3 style="font-size: 1.5rem;"><b>Findings breakdown</b></h3>
+				  {{#each categories }}
+				  <div class="progress-bar">
+					  <div class="percent pt-1 pb-1" style="width: {{ this.percent }};"><div> {{ this.percent }} </div></div>
+					  <h4 style="float: right;">{{ this.name }}</h4>
+				  </div>
+				  {{/each}}
+			  </div>
+		  </div>
+		</td></tr></tbody>
+		<!-- <tfoot><tr><td>
+            <div class="footer-space">&nbsp;</div>
+        </td></tr></tfoot> -->
+    </table>
+		  
+	{{#each categories as |category i| }}
+	<table class="break-page">
+        <!-- <thead><tr><td>
+            <div class="header-space">&nbsp;</div>
+        </td></tr></thead> -->
+        <tbody><tr><td>
+		  <div class="container page break-page" style="padding-left: 100px; padding-top: 100px;">
+			
+			  <h2><b>{{category.name}}</b></h2>
+			  <div class="card-body pt-0" style="border: 0; border-left: 5px dotted blue; padding-left: 50px; padding-right: 50px;">
+				{{#each category.topics as |topic j| }}
+				  <div class="reviews__card--internal" style="padding-top: 25px;">
+					  <div class="category-number"><h3 class="circle" style="text-align: center;">{{inc j }} </h3></div>
+					  <h3><big><b>{{ topic.topic }}</b></big></h3>
+					  <div>
+						  <h4 style="font-size: 1rem; border-bottom: 1px solid blue; padding-left: 50px; padding-bottom: 10px;">ITEMS</h4>
+						  {{#each topic.items as |item| }}
+						  	{{#if item.done }}
+							<div class="category-item">
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAUCAYAAADskT9PAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFuSURBVHgBxZaxS0JBHMe/d6YkRJqrENFSi6JUq1Ng0OJaTY465eb7C3TLJdpyKVtdgoiGcAlCKHRpEglqzOcQqQ/9dfdCCCG4py/vsx3cj+/nd+/3jmMQBK+O12jIygTE5BL/DGOs2uejXO+g1GYyfDRkT/MInsAceCjOacRPNIRLgt4hypyIUtAEA4tx6CXoukB2M4HMRkJ5v6sCRjSJwlYKAd+ico1rAkfrO8hHkrhsPaLYvFWuc0UgEgqjsJ1C8+MNRr3qqHZmgdWlECqJNLr9LxzWztG1eo7qlQXkcBniiCfDr3ezgLhC9+9O8frZgVOUBUQG8mLIxhIBn9/uPOD1251PEy5ZUN149lKzp9uI7tlr2X1kJYzMQwXNzjumRVlAUmz8TPdYotC4QaVVxyw4EvgtIb+Jk9/tL9jyRY6gETmEJjTCRfvP0AQxqnKPRWnoOQXTGiDHzXSpzS2Kk3gmYT6YBLofiMyeyP4GKjh33Wac8ysAAAAASUVORK5CYII=">
+								<label>{{ item.item }}</label>
+							</div>
+							{{else}}
+							<div class="category-item">
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAUCAYAAADskT9PAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFCSURBVHgBxZaxSsNQFIb/cy1IByFjAw4uitCl2epb+ApiwbnUB/ABtL5ARfAJipOgg7joZFycXNwMiJBB0Ir0914LIWIqPaHmflPghHx/zskJV2CJG+0VCI4pbIES4J8RcPhO6W4kN4/i5DSMqxD/hOmIEtVg5BBExXKHBIu264bkJrzBloFXJFAHqDdXS9WmoQpQb65h/fwEYW/7Vy3sdb5r2hALO0vLe7Pe/Pn8YscmCHc7dpWA1+s4kzdsqKf9AdLTC2ioQUnSH0ykNsQEyeRJ/wha1AGKQpSVO0pvgUjxtZZSHcjP3I0g68RBBSPIy/NtLxtCFcCtYZE8/02kZ1d4u3+Y+ZlyG7YJBW7Ppwn+qs0twLwxEKbwiLF/tjt4gmMOjRBbXrpgnR8iXRO5Y9FYItpjEqrAvSxxObJOdyT7AgarhYyR7OQHAAAAAElFTkSuQmCC">
+								<label>{{ item.item }}</label>
+								{{#each item.findings as |finding| }}
+								<h4 style="font-size: 1rem;">FINDING</h4>
+								<p>{{ finding }}</p>
+								{{/each}}
+							</div>
+							{{/if}}
+						  {{/each}}
+					  </div>
+				  </div>
+				{{/each}}
+			  </div>
+		  </div>
+        </td></tr></tbody>
+		<!-- <tfoot><tr><td>
+            <div class="footer-space">&nbsp;</div>
+        </td></tr></tfoot> -->
+    </table>
+	{{/each}}
+	
+  </body>
+</html>
