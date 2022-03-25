@@ -6,6 +6,16 @@ ruby "3.1.1"
 # db
 gem 'pg'
 
+# Code style and errors inspection officer, testing
+gem 'rspec-rails'
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
+gem 'rubocop-rake'
+gem 'rubocop-rails'
+
+# testing
+
 # sign in / sign up
 gem "devise"
 gem "devise-jwt"
