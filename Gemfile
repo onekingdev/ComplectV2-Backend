@@ -8,12 +8,13 @@ gem 'pg'
 
 # sign in / sign up
 gem "devise"
+gem "devise-jwt"
 
 # environment variables
-gem 'dotenv-rails'
+gem "dotenv-rails"
 
 # cors for api
-gem 'rack-cors'
+gem "rack-cors"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
