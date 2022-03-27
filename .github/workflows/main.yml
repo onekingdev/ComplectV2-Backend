@@ -61,10 +61,13 @@ jobs:
           bundler-cache: true
 
       - name: Create DB
+        env:
+          RAILS_ENV: test
         run: |
           bin/rails db:prepare
       - name: Run tests
         env:
+          RAILS_ENV: test
         run: |
           bundle exec rspec
       - name: Rubocop
