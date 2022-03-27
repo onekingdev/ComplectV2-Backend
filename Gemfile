@@ -6,6 +6,16 @@ ruby "3.1.1"
 # db
 gem 'pg'
 
+# Code style and errors inspection officer, testing
+gem 'rspec-rails'
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
+gem 'rubocop-rake'
+gem 'rubocop-rails'
+
+# testing
+
 # sign in / sign up
 gem "devise"
 gem "devise-jwt"
@@ -18,9 +28,6 @@ gem "rack-cors"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
-
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -58,4 +65,3 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-

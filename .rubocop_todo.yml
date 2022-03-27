@@ -1,0 +1,7 @@
+Lint/UnusedMethodArgument:
+  Exclude:
+    - 'app/controllers/users/sessions_controller.rb'
+
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/environments/production.rb'

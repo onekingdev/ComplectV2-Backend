@@ -1,0 +1,80 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+        services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        # tmpfs makes DB faster by using RAM
+        options: >-
+          --mount type=tmpfs,destination=/var/lib/postgresql/data
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      # redis:
+      #   image: redis
+      #   ports:
+      #     - 6379:6379
+      #   options: --entrypoint redis-server
+
+    # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+        # [n] - where the n is a number of parallel jobs you want to run your tests on.
+        # Use a higher number if you have slow tests to split them between more parallel jobs.
+        # Remember to update the value of the `ci_node_index` below to (0..n-1).
+    #     ci_node_total: [8]
+        # Indexes for parallel jobs (starting from zero).
+        # E.g. use [0, 1] for 2 parallel jobs, [0, 1, 2] for 3 parallel jobs, etc.
+    #     ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]
+
+    env:
+      RAILS_ENV: test
+      GEMFILE_RUBY_VERSION: 3.1.1
+      PGHOST: localhost
+      PGUSER: postgres
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Not needed with a .ruby-version file
+          ruby-version: 3.1.1
+          # runs 'bundle install' and caches installed gems automatically
+          bundler-cache: true
+
+      - name: Create DB
+        run: |
+          bin/rails db:prepare
+      - name: Run tests
+        env:
+        run: |
+          bundle exec rspec
+      - name: Rubocop
+        run: bundle exec rubocop
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "complect-v2-production"
+          heroku_email: "kourindouhime@gmail.com"
