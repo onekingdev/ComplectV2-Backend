@@ -63,6 +63,7 @@ jobs:
       - name: Create DB
         env:
           RAILS_ENV: test
+          POSTGRES_PASSWORD: postgres
         run: |
           bin/rails db:prepare
       - name: Run tests
