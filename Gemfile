@@ -7,7 +7,7 @@ ruby "3.1.1"
 gem 'pg'
 
 # Code style and errors inspection officer, testing
-gem 'rspec-rails'
+gem "rspec-rails", "~> 3.5"
 gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rspec'
@@ -31,6 +31,15 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
+
+# Swagger
+gem "rswag"
+
+# AWS
+gem "aws-sdk"
+
+# GROver
+gem "grover"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
