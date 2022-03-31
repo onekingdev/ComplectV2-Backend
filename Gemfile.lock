@@ -1373,6 +1373,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.3-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.3-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -1478,6 +1480,8 @@ GEM
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     ruby-rc4 (0.1.5)
+    shoulda-matchers (5.1.0)
+      activesupport (>= 5.2.0)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -1498,6 +1502,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
@@ -1519,6 +1524,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rake
   rubocop-rspec
+  shoulda-matchers (~> 5.0)
   tzinfo-data
 
 RUBY VERSION

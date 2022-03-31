@@ -25,6 +25,70 @@ paths:
                   type: string
               required:
               - filename
+  "/api/exams":
+    get:
+      summary: Exam list
+      tags:
+      - Exams
+      responses:
+        '200':
+          description: return exam list
+    post:
+      summary: Creates a exam
+      tags:
+      - Exams
+      parameters: []
+      responses:
+        '201':
+          description: created exam
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                user_id:
+                  type: integer
+                updated_by_id:
+                  type: integer
+              required:
+              - name
+              - starts_on
+              - ends_on
+    patch:
+      summary: Update Exam
+      tags:
+      - Exams
+      parameters: []
+      responses:
+        '200':
+          description: created exam
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                user_id:
+                  type: integer
+                updated_by_id:
+                  type: integer
   "/api/pdf":
     post:
       summary: Generate PDF
@@ -52,4 +116,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: ''

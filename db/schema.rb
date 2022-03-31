@@ -10,9 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_20_033213) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_31_073541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exam_requests", force: :cascade do |t|
+    t.bigint "exam_id"
+    t.bigint "user_id"
+    t.string "name"
+    t.text "details"
+    t.jsonb "text_items"
+    t.boolean "shared"
+    t.integer "shared_by_id"
+    t.integer "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_exam_requests_on_exam_id"
+    t.index ["shared_by_id"], name: "index_exam_requests_on_shared_by_id"
+    t.index ["updated_by_id"], name: "index_exam_requests_on_updated_by_id"
+    t.index ["user_id"], name: "index_exam_requests_on_user_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "starts_on", null: false
+    t.datetime "ends_on", null: false
+    t.datetime "completed_at"
+    t.string "share_uuid"
+    t.string "status", default: "inprogress"
+    t.bigint "user_id"
+    t.integer "updated_by_id"
+    t.integer "business_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_exams_on_business_id"
+    t.index ["share_uuid"], name: "index_exams_on_share_uuid"
+    t.index ["updated_by_id"], name: "index_exams_on_updated_by_id"
+    t.index ["user_id"], name: "index_exams_on_user_id"
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
