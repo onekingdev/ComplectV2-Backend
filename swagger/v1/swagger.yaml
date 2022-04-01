@@ -25,6 +25,61 @@ paths:
                   type: string
               required:
               - filename
+  "/api/exam_requests":
+    post:
+      summary: Creates a exam request
+      tags:
+      - Exam Requests
+      parameters: []
+      responses:
+        '201':
+          description: created exam request
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                details:
+                  type: string
+                exam_id:
+                  type: integer
+                user_id:
+                  type: integer
+                updated_by_id:
+                  type: integer
+              required:
+              - name
+    patch:
+      summary: Update Exam Request
+      tags:
+      - Exam Requests
+      parameters: []
+      responses:
+        '200':
+          description: created exam
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                user_id:
+                  type: integer
+                updated_by_id:
+                  type: integer
   "/api/exams":
     get:
       summary: Exam list
@@ -89,6 +144,33 @@ paths:
                   type: integer
                 updated_by_id:
                   type: integer
+  "/api/exams/{id}":
+    get:
+      summary: Retrieves a exam
+      tags:
+      - Exams
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Exam found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  starts_on:
+                    type: string
+                  ends_on:
+                    type: string
   "/api/pdf":
     post:
       summary: Generate PDF
@@ -112,6 +194,44 @@ paths:
                   type: string
               required:
               - filename
+  "/api/exams/{exam_id}/share_exams":
+    get:
+      summary: Share Exam list
+      tags:
+      - Share Exams
+      responses:
+        '200':
+          description: return exam list
+    post:
+      summary: Creates a share exam
+      tags:
+      - Share Exams
+      parameters: []
+      responses:
+        '201':
+          description: created share exam
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invited_email:
+                  type: string
+                user_id:
+                  type: integer
+              required:
+              - invited_email
+  "/api/exams/{exam_id}/share_exams/${id}":
+    delete:
+      summary: remove share exam
+      tags:
+      - Share Exams
+      responses:
+        '200':
+          description: remove share exam
 servers:
 - url: http://{defaultHost}
   variables:

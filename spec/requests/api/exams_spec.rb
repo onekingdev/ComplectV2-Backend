@@ -80,11 +80,11 @@ RSpec.describe 'Exams API' do
     end
   end
 
-  patch '/api/exams/{id}' do
-    get 'Retrieves a blog' do
+  path '/api/exams/{id}' do
+    get 'Retrieves a exam' do
       tags 'Exams'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      parameter name: :id, in: :path, type: :integer
 
       response '200', 'Exam found' do
         schema type: :object,

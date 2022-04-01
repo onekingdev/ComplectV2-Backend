@@ -1,5 +1,5 @@
 class Api::ExamsController < ApplicationController
-  before_action :fetch_exam, only: [:show, :update, :destroy]
+  before_action :fetch_exam, except: [:create, :index]
 
   def index
     @exams = Exam.all
@@ -21,6 +21,15 @@ class Api::ExamsController < ApplicationController
 
   def update
     if @exam.update(exam_params)
+      render json: { status: :ok, exam: @exam }
+    else
+      render json: { status: :unprocessable_entity, errors: @exam.errors }
+    end
+  end
+
+  def completed
+    completed_at = params[:completed] ? Time.current : nil
+    if @exam.update(completed_at: completed_at)
       render json: { status: :ok, exam: @exam }
     else
       render json: { status: :unprocessable_entity, errors: @exam.errors }

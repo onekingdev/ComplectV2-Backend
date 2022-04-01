@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     post 'csv' => 'csv#index'
     post 'pdf' => 'pdf#index'
 
-    resources :exams, except: [:edit]
+    resources :exams, except: [:edit] do
+      post 'completed', on: :member
+      resources :share_exams, only: [:index, :create, :destroy]
+    end
     resources :exam_requests, except: [:edit]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

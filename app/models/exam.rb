@@ -3,6 +3,7 @@ class Exam < ApplicationRecord
   belongs_to :updated_by, class_name: 'User', foreign_key: 'updated_by_id'
 
   has_many :exam_requests
+  has_many :share_exams
 
   validates :name, :starts_on, :ends_on, presence: true
   validates :name, length: { maximum: 255 }

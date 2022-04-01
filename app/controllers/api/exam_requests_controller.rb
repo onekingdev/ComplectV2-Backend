@@ -35,6 +35,6 @@ class Api::ExamRequestsController < ApplicationController
   end
 
   def exam_request_params
-    params.require(:exam_request).permit(:name, :details, :exam_id, :user_id, :updated_by_id, :shared_by_id, text_items: [])
+    params.require(:exam_request).permit(:name, :details, :shared, :exam_id, :user_id, :updated_by_id, :shared_by_id, text_items: [])
   end
 end
