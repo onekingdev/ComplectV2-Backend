@@ -7,7 +7,7 @@ ruby "3.1.1"
 gem 'pg'
 
 # Code style and errors inspection officer, testing
-gem "rspec-rails", "~> 3.5"
+gem "rspec-rails"
 gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rspec'
@@ -36,7 +36,9 @@ gem "puma", "~> 5.0"
 gem "rswag"
 
 # AWS
-gem "aws-sdk"
+group :production do
+  gem "aws-sdk"
+end
 
 # GROver
 gem "grover"
