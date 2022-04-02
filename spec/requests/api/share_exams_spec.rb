@@ -1,26 +1,27 @@
 require 'swagger_helper'
 
 RSpec.describe 'Share Exam API' do
+  let(:user) { User.create(email: 'test@gmail.com', password: '123456789') }
+  let(:exam) do
+    Exam.create(
+      name: 'foo',
+      starts_on: Time.current,
+      ends_on: Time.current + 3.days,
+      user_id: user.id,
+      updated_by_id: user.id
+    )
+  end
+
   path '/api/exams/{exam_id}/share_exams' do
-    let(:exam) do 
-      Exam.create(
-        name: 'test',
-        starts_on: '2020-10-10',
-        ends_on: '2020-11-10',
-        user_id: 1,
-        updated_by_id: 1
-      )
-    end
+    parameter name: :exam_id, in: :path, type: :integer
+    
     get 'Share Exam list' do
       tags 'Share Exams'
       consumes 'application/json'
 
-      response '200', 'return exam list' do
+      response '200', 'return share exam list' do
         let(:exam_id) { exam.id }
-        run_test! do |response|
-          data = JSON.parse(response.body)
-          expect(data['share_exams']).not_to be_nil
-        end
+        run_test!
       end
     end
     
@@ -37,29 +38,42 @@ RSpec.describe 'Share Exam API' do
       }
 
       response '201', 'created share exam' do
-        let(:exam) do
+        let(:exam_id) { exam.id }
+        let(:share_exam) do
           {
             invited_email: 'test@gmail.com',
-            user_id: 1
+            user_id: user.id
           }
         end
         run_test!
       end
 
       response '422', 'invalid request' do
-        let(:exam) { { invited_email: '' } }
+        let(:exam_id) { exam.id }
+        let(:share_exam) { { invited_email: '' } }
         run_test!
       end
     end
   end
 
-  path '/api/exams/{exam_id}/share_exams/${id}' do
+  path '/api/exams/{exam_id}/share_exams/{id}' do
+    parameter name: :exam_id, in: :path, type: :integer
+    parameter name: :id, in: :path, type: :integer
+    
     delete 'remove share exam' do
       tags 'Share Exams'
       consumes 'application/json'
 
       response '200', 'remove share exam' do
+        let(:example_exam_share_exam) do
+          ShareExam.create(
+            invited_email: 'complect@gmail.com',
+            user_id: user.id,
+            exam_id: exam.id
+          )
+        end
         let(:exam_id) { exam.id }
+        let(:id) { example_exam_share_exam.id }
         run_test!
       end
     end

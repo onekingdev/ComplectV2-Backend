@@ -54,14 +54,21 @@ paths:
                   type: integer
               required:
               - name
-    patch:
+  "/api/exam_requests/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    put:
       summary: Update Exam Request
       tags:
       - Exam Requests
       parameters: []
       responses:
         '200':
-          description: created exam
+          description: updated exam request
         '422':
           description: invalid request
       requestBody:
@@ -72,14 +79,19 @@ paths:
               properties:
                 name:
                   type: string
-                starts_on:
-                  type: string
-                ends_on:
+                details:
                   type: string
                 user_id:
                   type: integer
                 updated_by_id:
                   type: integer
+    delete:
+      summary: delete exam request
+      tags:
+      - Exam Requests
+      responses:
+        '200':
+          description: deleted exam request
   "/api/exams":
     get:
       summary: Exam list
@@ -118,14 +130,43 @@ paths:
               - name
               - starts_on
               - ends_on
-    patch:
+  "/api/exams/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a exam
+      tags:
+      - Exams
+      responses:
+        '200':
+          description: Exam found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  starts_on:
+                    type: string
+                  ends_on:
+                    type: string
+        '404':
+          description: exam not found
+    put:
       summary: Update Exam
       tags:
       - Exams
       parameters: []
       responses:
         '200':
-          description: created exam
+          description: updated exam
         '422':
           description: invalid request
       requestBody:
@@ -144,33 +185,13 @@ paths:
                   type: integer
                 updated_by_id:
                   type: integer
-  "/api/exams/{id}":
-    get:
-      summary: Retrieves a exam
+    delete:
+      summary: Delete Exam
       tags:
       - Exams
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
       responses:
         '200':
-          description: Exam found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  starts_on:
-                    type: string
-                  ends_on:
-                    type: string
+          description: deleted exam
   "/api/pdf":
     post:
       summary: Generate PDF
@@ -195,13 +216,19 @@ paths:
               required:
               - filename
   "/api/exams/{exam_id}/share_exams":
+    parameters:
+    - name: exam_id
+      in: path
+      required: true
+      schema:
+        type: integer
     get:
       summary: Share Exam list
       tags:
       - Share Exams
       responses:
         '200':
-          description: return exam list
+          description: return share exam list
     post:
       summary: Creates a share exam
       tags:
@@ -224,7 +251,18 @@ paths:
                   type: integer
               required:
               - invited_email
-  "/api/exams/{exam_id}/share_exams/${id}":
+  "/api/exams/{exam_id}/share_exams/{id}":
+    parameters:
+    - name: exam_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
     delete:
       summary: remove share exam
       tags:

@@ -1,6 +1,17 @@
 require 'swagger_helper'
 
 RSpec.describe 'Exams API' do
+  let(:user) { User.create(email: 'test@gmail.com', password: '123456789') }
+  let(:example_exam) do
+    Exam.create(
+      name: 'foo',
+      starts_on: Time.current,
+      ends_on: Time.current + 3.days,
+      user_id: user.id,
+      updated_by_id: user.id
+    )
+  end
+  
   path '/api/exams' do
     get 'Exam list' do
       tags 'Exams'
@@ -33,10 +44,10 @@ RSpec.describe 'Exams API' do
         let(:exam) do
           {
             name: 'test',
-            starts_on: '2020-10-10',
-            ends_on: '2020-11-10',
-            user_id: 1,
-            updated_by_id: 1
+            starts_on: Time.current + 1.day,
+            ends_on: Time.current + 10.days,
+            user_id: user.id,
+            updated_by_id: user.id
           }
         end
         run_test!
@@ -47,11 +58,37 @@ RSpec.describe 'Exams API' do
         run_test!
       end
     end
+  end
 
-    patch 'Update Exam' do
+  path '/api/exams/{id}' do
+    parameter name: :id, in: :path, type: :integer
+
+    let(:id) { example_exam.id }
+    get 'Retrieves a exam' do
+      tags 'Exams'
+      produces 'application/json'
+      # parameter name: :id, in: :path, type: :integer
+
+      response '200', 'Exam found' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer },
+            name: { type: :string },
+            starts_on: { type: :string },
+            ends_on: { type: :string }
+          }
+        run_test!
+      end
+
+      response '404', 'exam not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+    end
+
+    put 'Update Exam' do
       tags 'Exams'
       consumes 'application/json'
-
       parameter name: :exam, in: :body, schema: {
         type: :object,
         properties: {
@@ -63,11 +100,14 @@ RSpec.describe 'Exams API' do
         }
       }
 
-      response '200', 'created exam' do
+      response '200', 'updated exam' do
         let(:exam) do
           {
-            name: 'ruby',
-            starts_on: '2020-10-10'
+            name: 'test',
+            starts_on: Time.current + 1.day,
+            ends_on: Time.current + 10.days,
+            user_id: user.id,
+            updated_by_id: user.id
           }
         end
         run_test!
@@ -78,24 +118,12 @@ RSpec.describe 'Exams API' do
         run_test!
       end
     end
-  end
 
-  path '/api/exams/{id}' do
-    get 'Retrieves a exam' do
+    delete 'Delete Exam' do
       tags 'Exams'
-      produces 'application/json'
-      parameter name: :id, in: :path, type: :integer
+      consumes 'application/json'
 
-      response '200', 'Exam found' do
-        schema type: :object,
-          properties: {
-            id: { type: :integer },
-            name: { type: :string },
-            starts_on: { type: :string },
-            ends_on: { type: :string }
-          }
-
-        let(:id) { Exam.create(name: 'foo', starts_on: Time.now.current, ends_on: Time.now.current + 3.days, user_id: User.first.id, updated_by_id: User.first.id).id }
+      response '200', 'deleted exam' do
         run_test!
       end
     end

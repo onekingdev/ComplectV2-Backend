@@ -4,17 +4,17 @@ class Api::ExamRequestsController < ApplicationController
   def create
     exam_request = ExamRequest.new(exam_request_params)
     if exam_request.save
-      render json: { status: :created, exam_request: exam_request }
+      render json: { exam_request: exam_request }, status: :created
     else
-      render json: { status: :unprocessable_entity, errors: exam_request.errors }
+      render json: { errors: exam_request.errors }, status: :unprocessable_entity
     end
   end
 
   def update
     if @exam_request.update(exam_request_params)
-      render json: { status: :ok, exam_request: @exam_request }
+      render json: { exam_request: @exam_request }
     else
-      render json: { status: :unprocessable_entity, errors: @exam_request.errors }
+      render json: { errors: @exam_request.errors }, status: :unprocessable_entity
     end
   end
 
@@ -22,7 +22,7 @@ class Api::ExamRequestsController < ApplicationController
     if @exam_request.destroy
       render json: { status: :ok }
     else
-      render json: { status: :unprocessable_entity }
+      render json: {}, status: :unprocessable_entity
     end
   end
 

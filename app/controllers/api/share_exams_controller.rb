@@ -12,17 +12,17 @@ class Api::ShareExamsController < ApplicationController
 
     if share_exam.save
       # send email
-      render json: { status: :created, share_exam: share_exam }
+      render json: { share_exam: share_exam }, status: :created
     else
-      render json: { status: :unprocessable_entity, errors: share_exam.errors }
+      render json: { errors: share_exam.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @share_exam.destroy
-      render json: { status: :ok }
+      render json: { share_exam: @share_exam }
     else
-      render json: { status: :unprocessable_entity }
+      render json: { error: 'Can not delete' }, status: :unprocessable_entity
     end
   end
 

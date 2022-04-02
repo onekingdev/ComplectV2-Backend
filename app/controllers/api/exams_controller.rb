@@ -13,17 +13,17 @@ class Api::ExamsController < ApplicationController
   def create
     exam = Exam.new(exam_params)
     if exam.save
-      render json: { status: :created, exam: exam }
+      render json: { exam: exam }, status: :created
     else
-      render json: { status: :unprocessable_entity, errors: exam.errors }
+      render json: { errors: exam.errors }, status: :unprocessable_entity
     end
   end
 
   def update
     if @exam.update(exam_params)
-      render json: { status: :ok, exam: @exam }
+      render json: { exam: @exam }
     else
-      render json: { status: :unprocessable_entity, errors: @exam.errors }
+      render json: { errors: @exam.errors }, status: :unprocessable_entity
     end
   end
 
@@ -38,9 +38,9 @@ class Api::ExamsController < ApplicationController
 
   def destroy
     if @exam.destroy
-      render json: { status: :ok }
+      render json: { exam: @exam }
     else
-      render json: { status: :unprocessable_entity }
+      render json: { error: 'Can not delete' }, status: :unprocessable_entity
     end
   end
 
