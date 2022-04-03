@@ -67,7 +67,6 @@ RSpec.describe 'Exams API' do
     get 'Retrieves a exam' do
       tags 'Exams'
       produces 'application/json'
-      # parameter name: :id, in: :path, type: :integer
 
       response '200', 'Exam found' do
         schema type: :object,
@@ -122,10 +121,51 @@ RSpec.describe 'Exams API' do
     delete 'Delete Exam' do
       tags 'Exams'
       consumes 'application/json'
-
       response '200', 'deleted exam' do
         run_test!
       end
+    end
+  end
+
+  path '/api/exams/{id}/completed' do
+    parameter name: :id, in: :path, type: :integer
+    let(:id) { example_exam.id }
+    post 'Completed exam' do
+      tags 'Exams'
+      consumes 'application/json'
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          completed: { type: :boolean }
+        }
+      }
+
+      response '200', 'completed exam' do
+        let(:params) { { completed: true } }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['exam']['completed_at']).not_to be_nil
+        end
+      end
+    end
+
+    post 'Uncompleted exam' do
+      tags 'Exams'
+      consumes 'application/json'
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          completed: { type: :boolean }
+        }
+      }
+
+      response '200', 'uncompleted exam' do
+        let(:params) { { completed: false } }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['exam']['completed_at']).to be_nil
+        end
+      end      
     end
   end
 end

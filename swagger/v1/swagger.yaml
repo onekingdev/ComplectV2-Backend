@@ -25,7 +25,13 @@ paths:
                   type: string
               required:
               - filename
-  "/api/exam_requests":
+  "/api/exams/{exam_id}/exam_requests":
+    parameters:
+    - name: exam_id
+      in: path
+      required: true
+      schema:
+        type: integer
     post:
       summary: Creates a exam request
       tags:
@@ -46,16 +52,19 @@ paths:
                   type: string
                 details:
                   type: string
-                exam_id:
-                  type: integer
                 user_id:
                   type: integer
                 updated_by_id:
                   type: integer
               required:
               - name
-  "/api/exam_requests/{id}":
+  "/api/exams/{exam_id}/exam_requests/{id}":
     parameters:
+    - name: exam_id
+      in: path
+      required: true
+      schema:
+        type: integer
     - name: id
       in: path
       required: true
@@ -192,6 +201,29 @@ paths:
       responses:
         '200':
           description: deleted exam
+  "/api/exams/{id}/completed":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Uncompleted exam
+      tags:
+      - Exams
+      parameters: []
+      responses:
+        '200':
+          description: uncompleted exam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completed:
+                  type: boolean
   "/api/pdf":
     post:
       summary: Generate PDF

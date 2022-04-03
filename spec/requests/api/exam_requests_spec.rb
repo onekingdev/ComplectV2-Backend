@@ -23,7 +23,10 @@ RSpec.describe 'Exam Request API' do
     )
   end
 
-  path '/api/exam_requests' do
+  path '/api/exams/{exam_id}/exam_requests' do
+    parameter name: :exam_id, in: :path, type: :integer
+    let(:exam_id) { exam.id }
+
     post 'Creates a exam request' do
       tags 'Exam Requests'
       consumes 'application/json'
@@ -32,7 +35,6 @@ RSpec.describe 'Exam Request API' do
         properties: {
           name: { type: :string },
           details: { type: :string },
-          exam_id: { type: :integer },
           user_id: { type: :integer },
           updated_by_id: { type: :integer }
         },
@@ -43,7 +45,6 @@ RSpec.describe 'Exam Request API' do
         let(:exam_request) do
           {
             name: 'test',
-            exam_id: exam.id,
             user_id: user.id,
             updated_by_id: user.id
           }
@@ -58,8 +59,11 @@ RSpec.describe 'Exam Request API' do
     end
   end
 
-  path '/api/exam_requests/{id}' do
+  path '/api/exams/{exam_id}/exam_requests/{id}' do
+    parameter name: :exam_id, in: :path, type: :integer
     parameter name: :id, in: :path, type: :integer
+
+    let(:exam_id) { exam.id }
     let(:id) { example_exam_request.id }
 
     put 'Update Exam Request' do

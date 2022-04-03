@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     resources :exams, except: [:edit] do
       post 'completed', on: :member
       resources :share_exams, only: [:index, :create, :destroy]
+      resources :exam_requests, except: [:edit]
     end
-    resources :exam_requests, except: [:edit]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

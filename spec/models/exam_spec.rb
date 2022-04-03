@@ -34,4 +34,17 @@ RSpec.describe Exam, type: :model do
     exam = Exam.create(starts_on: Time.current + 10.day, ends_on: Time.current + 1.day)
     expect(exam.errors.messages[:starts_on]).to eq(["can't be greater than end date."])
   end
+
+  it 'auto generate share_uuid after create' do
+    user = User.create(email: 'example@gmail.com', password: '12345678')
+    exam = Exam.create(
+      name: 'Ruby',
+      starts_on: Time.current + 1.day,
+      ends_on: Time.current + 2.days,
+      user: user,
+      updated_by: user
+    )
+
+    expect(exam.share_uuid).not_to be_nil
+  end
 end
