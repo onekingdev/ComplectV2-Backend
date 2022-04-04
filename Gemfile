@@ -19,6 +19,7 @@ gem 'rubocop-rails'
 # sign in / sign up
 gem "devise"
 gem "devise-jwt"
+gem "devise-two-factor", github: "cybersecuricy/devise-two-factor", branch: "securicy-fixes-rails-7"
 
 # environment variables
 gem "dotenv-rails"
