@@ -6,6 +6,19 @@ class Users::SessionsController < Devise::SessionsController
     render json: { message: "Please sign in." }
   end
 
+  def create
+    user = User.find_first_by_auth_conditions(email: params[:user][:email])
+    return render json: { error: "Wrong password" } unless user.valid_password?(params[:user][:password])
+
+    user.update!(otp_secret: User.generate_otp_secret) if user.otp_secret.nil?
+    if params[:user][:otp_attempt].blank?
+      puts "\n**** OTP: ****\n*   #{user.current_otp}   *\n**************\n\n" if Rails.env == "development"
+      OtpMailer.send_otp(user.email, user.current_otp).deliver_later if Rails.env != "development"
+      return render json: { error: "Missing OTP" }
+    end
+    super
+  end
+
   private
 
   def respond_with(resource, _opts = {})
@@ -22,5 +35,11 @@ class Users::SessionsController < Devise::SessionsController
 
   def log_out_failure
     render json: { message: "Sign out failure." }, status: :unauthorized
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:otp_attempt])
   end
 end
