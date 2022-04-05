@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     post 'csv' => 'csv#index'
     post 'pdf' => 'pdf#index'
+    resources :risks, except: [:edit]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

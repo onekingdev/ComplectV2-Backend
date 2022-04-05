@@ -48,8 +48,111 @@ paths:
                   type: string
               required:
               - filename
+  "/api/risks":
+    get:
+      summary: Risk list
+      tags:
+      - risks
+      responses:
+        '200':
+          description: return risk list
+    post:
+      summary: Creates a risk
+      tags:
+      - risks
+      parameters: []
+      responses:
+        '201':
+          description: created risk
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                impact:
+                  type: string
+                likelihood:
+                  type: string
+                level:
+                  type: string
+                user_id:
+                  type: integer
+                updated_by_id:
+                  type: integer
+              required:
+              - name
+              - impact
+              - likelihood
+              - level
+  "/api/risks/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a risk
+      tags:
+      - risks
+      responses:
+        '200':
+          description: risk found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  impact:
+                    type: string
+                  likelihood:
+                    type: string
+                  level:
+                    type: string
+        '404':
+          description: risk not found
+    put:
+      summary: Update risk
+      tags:
+      - risks
+      parameters: []
+      responses:
+        '200':
+          description: updated risk
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                impact:
+                  type: string
+                likelihood:
+                  type: string
+                level:
+                  type: string
+    delete:
+      summary: Delete risk
+      tags:
+      - risks
+      responses:
+        '200':
+          description: deleted risk
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: ''
