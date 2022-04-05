@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_111841) do
     t.string "name", null: false
     t.text "description"
     t.integer "position"
-    t.string "status"
+    t.string "status", default: "draft"
     t.integer "src_id"
     t.datetime "published_at"
     t.integer "published_by_id"

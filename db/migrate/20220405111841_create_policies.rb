@@ -4,7 +4,7 @@ class CreatePolicies < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.text :description
       t.integer :position
-      t.string :status
+      t.string :status, default: 'draft'
       t.integer :src_id, index: true
       t.datetime :published_at
       t.integer :published_by_id, index: true
