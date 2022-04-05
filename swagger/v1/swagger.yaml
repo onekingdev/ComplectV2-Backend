@@ -306,4 +306,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: ''
+      default: localhost:3000
