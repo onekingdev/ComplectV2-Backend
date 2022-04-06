@@ -1,8 +1,8 @@
-class Api::ExamsController < ApplicationController
+class Api::ExamsController < Api::BaseController
   before_action :fetch_exam, except: [:create, :index]
 
   def index
-    @exams = Exam.all
+    @exams = current_user.exams
     render json: { exams: @exams }
   end
 
@@ -11,7 +11,7 @@ class Api::ExamsController < ApplicationController
   end
 
   def create
-    exam = Exam.new(exam_params)
+    exam = Exam.new(exam_params.merge(user: current_user, updated_by: current_user))
     if exam.save
       render json: { exam: exam }, status: :created
     else
@@ -20,7 +20,7 @@ class Api::ExamsController < ApplicationController
   end
 
   def update
-    if @exam.update(exam_params)
+    if @exam.update(exam_params.merge(updated_by: current_user))
       render json: { exam: @exam }
     else
       render json: { errors: @exam.errors }, status: :unprocessable_entity
@@ -29,7 +29,7 @@ class Api::ExamsController < ApplicationController
 
   def completed
     completed_at = params[:completed] ? Time.current : nil
-    if @exam.update(completed_at: completed_at)
+    if @exam.update(completed_at: completed_at, updated_by: current_user)
       render json: { status: :ok, exam: @exam }
     else
       render json: { status: :unprocessable_entity, errors: @exam.errors }
@@ -53,6 +53,6 @@ class Api::ExamsController < ApplicationController
   end
 
   def exam_params
-    params.require(:exam).permit(:name, :starts_on, :ends_on, :user_id, :updated_by_id)
+    params.require(:exam).permit(:name, :starts_on, :ends_on)
   end
 end

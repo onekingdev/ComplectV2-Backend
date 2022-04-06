@@ -1,4 +1,4 @@
-class Api::ShareExamsController < ApplicationController
+class Api::ShareExamsController < Api::BaseController
   before_action :fetch_exam
   before_action :fetch_share_exam, only: [:destroy]
 
@@ -8,7 +8,7 @@ class Api::ShareExamsController < ApplicationController
   end
 
   def create
-    share_exam = @exam.share_exams.create(share_exam_params)
+    share_exam = @exam.share_exams.create(share_exam_params.merge(user: current_user, updated_by: current_user))
 
     if share_exam.save
       # send email
@@ -29,7 +29,7 @@ class Api::ShareExamsController < ApplicationController
   private
 
   def share_exam_params
-    params.require(:share_exam).permit(:invited_email, :user_id)
+    params.require(:share_exam).permit(:invited_email)
   end
 
   def fetch_exam
