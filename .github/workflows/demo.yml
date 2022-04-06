@@ -63,3 +63,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "complect-v2-demo"
           heroku_email: "kourindouhime@gmail.com"
+          branch: demo
