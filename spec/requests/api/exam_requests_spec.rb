@@ -1,7 +1,10 @@
 require 'swagger_helper'
 
 RSpec.describe 'Exam Request API' do
-  let(:user) { User.create(email: 'test@gmail.com', password: '123456789') }
+  include ApiHelper
+  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current) }
+  let(:token) { get_token(user) }
+  
   let(:exam) do
     Exam.create(
       name: 'foo',
@@ -24,8 +27,10 @@ RSpec.describe 'Exam Request API' do
   end
 
   path '/api/exams/{exam_id}/exam_requests' do
+    parameter name: 'Authorization', in: :header, type: :string
     parameter name: :exam_id, in: :path, type: :integer
     let(:exam_id) { exam.id }
+    let(:Authorization) { token }
 
     post 'Creates a exam request' do
       tags 'Exam Requests'
@@ -62,7 +67,8 @@ RSpec.describe 'Exam Request API' do
   path '/api/exams/{exam_id}/exam_requests/{id}' do
     parameter name: :exam_id, in: :path, type: :integer
     parameter name: :id, in: :path, type: :integer
-
+    parameter name: 'Authorization', in: :header, type: :string
+    let(:Authorization) { token }
     let(:exam_id) { exam.id }
     let(:id) { example_exam_request.id }
 

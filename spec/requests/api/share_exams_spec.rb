@@ -1,10 +1,12 @@
 require 'swagger_helper'
 
 RSpec.describe 'Share Exam API' do
-  let(:user) { User.create(email: 'test@gmail.com', password: '123456789') }
+  include ApiHelper
+  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current) }
+  let(:token) { get_token(user) }
   let(:exam) do
     Exam.create(
-      name: 'foo',
+      name: 'test',
       starts_on: Time.current,
       ends_on: Time.current + 3.days,
       user_id: user.id,
@@ -14,6 +16,8 @@ RSpec.describe 'Share Exam API' do
 
   path '/api/exams/{exam_id}/share_exams' do
     parameter name: :exam_id, in: :path, type: :integer
+    parameter name: 'Authorization', in: :header, type: :string
+    let(:Authorization) { token }
     
     get 'Share Exam list' do
       tags 'Share Exams'
@@ -31,8 +35,7 @@ RSpec.describe 'Share Exam API' do
       parameter name: :share_exam, in: :body, schema: {
         type: :object,
         properties: {
-          invited_email: { type: :string },
-          user_id: { type: :integer }
+          invited_email: { type: :string }
         },
         required: ['invited_email']
       }
@@ -59,6 +62,8 @@ RSpec.describe 'Share Exam API' do
   path '/api/exams/{exam_id}/share_exams/{id}' do
     parameter name: :exam_id, in: :path, type: :integer
     parameter name: :id, in: :path, type: :integer
+    parameter name: 'Authorization', in: :header, type: :string
+    let(:Authorization) { token }
     
     delete 'remove share exam' do
       tags 'Share Exams'
