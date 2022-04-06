@@ -4,6 +4,47 @@ info:
   title: API V1
   version: v1
 paths:
+  "/users":
+    post:
+      summary: Basic Sign Up
+      tags:
+      - Devise
+      parameters: []
+      response:
+        "200":
+          description: "Registered"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+  "/users/sign_in":
+    post:
+      summary: Basic Sign In
+      tags:
+      - Devise
+      parameters: []
+      response:
+        "200":
+          description: "Signed In"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                otp_attempt:
+                  type: string
+
   "/api/csv":
     post:
       summary: Generate CSV

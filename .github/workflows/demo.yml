@@ -37,7 +37,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1.1
-          bundler-cache: true
+          bundler-cache: false
       - name: Create DB
         env:
           RAILS_ENV: test
