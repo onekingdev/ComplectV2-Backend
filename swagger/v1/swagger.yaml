@@ -4,47 +4,6 @@ info:
   title: API V1
   version: v1
 paths:
-  "/users":
-    post:
-      summary: Basic Sign Up
-      tags:
-      - Devise
-      parameters: []
-      response:
-        "200":
-          description: "Registered"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-  "/users/sign_in":
-    post:
-      summary: Basic Sign In
-      tags:
-      - Devise
-      parameters: []
-      response:
-        "200":
-          description: "Signed In"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-                otp_attempt:
-                  type: string
-
   "/api/csv":
     post:
       summary: Generate CSV
@@ -68,6 +27,10 @@ paths:
               - filename
   "/api/exams/{exam_id}/exam_requests":
     parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     - name: exam_id
       in: path
       required: true
@@ -111,6 +74,10 @@ paths:
       required: true
       schema:
         type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     put:
       summary: Update Exam Request
       tags:
@@ -143,6 +110,11 @@ paths:
         '200':
           description: deleted exam request
   "/api/exams":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     get:
       summary: Exam list
       tags:
@@ -172,16 +144,16 @@ paths:
                   type: string
                 ends_on:
                   type: string
-                user_id:
-                  type: integer
-                updated_by_id:
-                  type: integer
               required:
               - name
               - starts_on
               - ends_on
   "/api/exams/{id}":
     parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     - name: id
       in: path
       required: true
@@ -231,10 +203,6 @@ paths:
                   type: string
                 ends_on:
                   type: string
-                user_id:
-                  type: integer
-                updated_by_id:
-                  type: integer
     delete:
       summary: Delete Exam
       tags:
@@ -249,6 +217,10 @@ paths:
       required: true
       schema:
         type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     post:
       summary: Uncompleted exam
       tags:
@@ -295,6 +267,10 @@ paths:
       required: true
       schema:
         type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     get:
       summary: Share Exam list
       tags:
@@ -320,8 +296,6 @@ paths:
               properties:
                 invited_email:
                   type: string
-                user_id:
-                  type: integer
               required:
               - invited_email
   "/api/exams/{exam_id}/share_exams/{id}":
@@ -336,6 +310,10 @@ paths:
       required: true
       schema:
         type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     delete:
       summary: remove share exam
       tags:
@@ -347,4 +325,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: ''
