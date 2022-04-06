@@ -38,6 +38,8 @@ jobs:
         with:
           ruby-version: 3.1.1
           bundler-cache: false
+      - name: Bundle install
+        run: bundle
       - name: Create DB
         env:
           RAILS_ENV: test
