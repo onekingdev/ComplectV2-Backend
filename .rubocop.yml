@@ -228,6 +228,9 @@ Metrics/ModuleLength:
 Lint/Debugger:
   Enabled: false
 
+Lint/Void:
+  Enabled: false
+
 # === Naming ===
 
 Naming/VariableNumber:
