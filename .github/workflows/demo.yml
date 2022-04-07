@@ -69,7 +69,7 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
       - name: Unshallow Clone
-        run: git fetch --all --unshallow
+        run: git fetch --all --unshallow; git filter-branch -- --all
       - name: Push to heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
