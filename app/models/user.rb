@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist,
                                otp_secret_encryption_key: ENV['OTP_SECRET_KEY']
+
+  has_many :exams
+  has_many :exam_requests
+  has_many :share_exams
 end
