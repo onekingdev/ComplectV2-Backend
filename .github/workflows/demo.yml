@@ -64,12 +64,11 @@ jobs:
           bundle exec rspec
       - name: Rubocop
         run: bundle exec rubocop
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "complect-v2-demo"
-          heroku_email: "kourindouhime@gmail.com"
+      - name: Login to Heroku Container registry
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Add heroku remote manually
+        run: git remote add heroku https://git.heroku.com/complect-v2-demo.git
+      - name: Push to heroku
+        run: git push heroku demo:main --force
