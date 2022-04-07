@@ -9,7 +9,7 @@ RSpec.describe ShareExam, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:invited_email) }
-    it { should validate_uniqueness_of(:invited_email).case_insensitive }
+    it { should validate_uniqueness_of(:invited_email).case_insensitive.scoped_to(:exam_id) }
     it { should allow_value('test@gmail.com').for(:invited_email) }
   end
 end
