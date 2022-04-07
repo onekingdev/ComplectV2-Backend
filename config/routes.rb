@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     post 'pdf' => 'pdf#index'
     resources :risks, except: [:edit]
     resources :policies, except: [:edit]
+
+    resources :exams, except: [:edit] do
+      post 'completed', on: :member
+      resources :share_exams, only: [:index, :create, :destroy]
+      resources :exam_requests, except: [:edit]
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
