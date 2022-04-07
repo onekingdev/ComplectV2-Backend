@@ -46,8 +46,6 @@ jobs:
           POSTGRES_PASSWORD: postgres
         run: |
           bin/rails db:prepare
-      - name: Prepare db encryption
-        run: bin/rails db:encryption:init
       - name: Run tests
         env:
           RAILS_ENV: test
