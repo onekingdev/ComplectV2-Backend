@@ -1517,9 +1517,10 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  ruby
   x86_64-darwin-20
   x86_64-darwin-21
-  
+
 DEPENDENCIES
   aws-sdk
   bootsnap
