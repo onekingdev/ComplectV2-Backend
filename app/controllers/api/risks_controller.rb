@@ -1,4 +1,5 @@
 class Api::RisksController < ApplicationController
+  before_action :authenticate_user!
   before_action :fetch_risk, only: [:show, :update, :destroy]
 
   def index
@@ -11,7 +12,7 @@ class Api::RisksController < ApplicationController
   end
 
   def create
-    risk = Risk.new(risk_params)
+    risk = Risk.new(risk_params.merge(user: current_user, updated_by: current_user))
     if risk.save
       render json: { risk: risk }, status: :created
     else
@@ -20,7 +21,7 @@ class Api::RisksController < ApplicationController
   end
 
   def update
-    if @risk.update(risk_params)
+    if @risk.update(risk_params.merge(updated_by: current_user))
       render json: { risk: @risk }
     else
       render json: { errors: @risk.errors }, status: :unprocessable_entity
@@ -44,6 +45,6 @@ class Api::RisksController < ApplicationController
   end
 
   def risk_params
-    params.require(:risk).permit(:name, :impact, :likelihood, :level, :user_id, :updated_by_id)
+    params.require(:risk).permit(:name, :impact, :likelihood, :level)
   end
 end

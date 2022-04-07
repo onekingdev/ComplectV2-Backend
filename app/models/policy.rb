@@ -9,4 +9,12 @@ class Policy < ApplicationRecord
     'published': 'published',
     'archived': 'archived'
   }
+
+  after_commit :update_position, on: :create
+
+  private
+
+  def update_position
+    update(position: id)
+  end
 end
