@@ -68,7 +68,7 @@ jobs:
         env: 
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
-      - name: Add heroku remote manually
-        run: git remote add heroku https://git.heroku.com/complect-v2-demo.git
       - name: Push to heroku
-        run: git push heroku demo:main --force
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/complect-v2-demo.git main --force
