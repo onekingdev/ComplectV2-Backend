@@ -50,6 +50,9 @@ jobs:
         env:
           RAILS_ENV: test
           POSTGRES_PASSWORD: postgres
+          ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: eiAAXbXPAPpqiLxjyCGNOHGTuEEzZk5O
+          ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: iQR7UT9Jd8XKjSp2sikMxTxIXIpjXKaC
+          ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: 67Gw8Ce4L4VquOSJo0O4NCj9nHfydB9u
         run: |
           bundle exec rspec
       - name: Rubocop
