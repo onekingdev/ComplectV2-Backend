@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_04_110036) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_07_150001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "businesses", force: :cascade do |t|
+    t.string "business_name"
+    t.string "crd"
+    t.integer "aum"
+    t.integer "accounts"
+    t.string "time_zone"
+    t.string "phone_number"
+    t.string "website"
+    t.string "address"
+    t.string "apt_unit"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.integer "user_id"
+    t.jsonb "logo"
+    t.integer "payment_method_id"
+    t.string "stripe_customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "exam_requests", force: :cascade do |t|
     t.bigint "exam_id"
@@ -55,6 +76,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_110036) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "user_id"
+    t.string "time_zone"
+    t.string "address"
+    t.string "apt_unit"
+    t.string "city"
+    t.string "state"
+    t.string "phone_number"
+    t.string "zipcode"
+    t.boolean "availability"
+    t.boolean "former_regulator"
+    t.decimal "hourly_rate"
+    t.jsonb "avatar"
+    t.jsonb "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "share_exams", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "exam_id"
@@ -90,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_110036) do
     t.text "otp_secret"
     t.integer "consumed_timestep"
     t.boolean "otp_required_for_login", default: true
+    t.string "kind"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
 
-  namespace :api do
+  namespace :api, defaults: {format: :json} do
     post 'csv' => 'csv#index'
     post 'pdf' => 'pdf#index'
 
+    resources :profiles, only: [:update, :show]
     resources :exams, except: [:edit] do
       post 'completed', on: :member
       resources :share_exams, only: [:index, :create, :destroy]

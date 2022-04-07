@@ -12,8 +12,7 @@ class Users::SessionsController < Devise::SessionsController
 
     user.update!(otp_secret: User.generate_otp_secret) if user.otp_secret.nil?
     if params[:user][:otp_attempt].blank?
-      puts "\n**** OTP: ****\n*   #{user.current_otp}   *\n**************\n\n" if Rails.env == "development"
-      OtpMailer.send_otp(user.email, user.current_otp).deliver_later if Rails.env != "development"
+      user.send_otp
       return render json: { error: "Missing OTP" }
     end
     super
