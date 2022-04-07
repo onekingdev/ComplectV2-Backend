@@ -38,6 +38,8 @@ jobs:
         with:
           ruby-version: 3.1.1
           bundler-cache: false
+      - name: Bundle install
+        run: bundle
       - name: Create DB
         env:
           RAILS_ENV: test
@@ -47,6 +49,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
+          POSTGRES_PASSWORD: postgres
         run: |
           bundle exec rspec
       - name: Rubocop
@@ -60,3 +63,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "complect-v2-demo"
           heroku_email: "kourindouhime@gmail.com"
+          branch: demo
