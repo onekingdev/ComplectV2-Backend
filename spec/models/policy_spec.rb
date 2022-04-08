@@ -8,6 +8,9 @@ RSpec.describe Policy, type: :model do
     it { should belong_to(:updated_by).class_name('User') }
     it { should belong_to(:published_by).class_name('User').optional }
     it { should belong_to(:archived_by).class_name('User').optional }
+
+    it { should have_many(:risk_policies) }
+    it { should have_many(:risks) }
   end
 
   describe 'validations' do

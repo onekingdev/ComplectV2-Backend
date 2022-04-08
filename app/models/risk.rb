@@ -5,7 +5,7 @@ class Risk < ApplicationRecord
   has_many :policies, through: :risk_policies
 
   validates :name, :impact, :likelihood, :level, presence: true
-  validates :name, length: { maximum: 255 }, uniqueness: { scope: :business_id }
+  validates :name, length: { maximum: 255 }
 
   enum impact: {
     'low': 'low',
