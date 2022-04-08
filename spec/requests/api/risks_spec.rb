@@ -31,7 +31,8 @@ RSpec.describe 'Risks API' do
           name: { type: :string },
           impact: { type: :string },
           likelihood: { type: :string },
-          level: { type: :string }
+          level: { type: :string },
+          policy_ids: { type: :array }
         },
         required: ['name', 'impact', 'likelihood', 'level']
       }

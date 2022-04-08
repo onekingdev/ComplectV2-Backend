@@ -330,7 +330,7 @@ paths:
     get:
       summary: Retrieves a policy
       tags:
-      - Policys
+      - Policies
       responses:
         '200':
           description: policy found
@@ -352,7 +352,7 @@ paths:
     put:
       summary: Update policy
       tags:
-      - Policys
+      - Policies
       parameters: []
       responses:
         '200':
@@ -374,10 +374,65 @@ paths:
     delete:
       summary: Delete policy
       tags:
-      - Policys
+      - Policies
       responses:
         '200':
           description: deleted policy
+  "/api/policies/{id}/published":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    post:
+      summary: Published Policy
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '200':
+          description: published policy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+  "/api/policies/{id}/archived":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    post:
+      summary: Archived policy
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '200':
+          description: archived policy
+        '422':
+          description: can not archived
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: boolean
   "/api/risks":
     parameters:
     - name: Authorization
