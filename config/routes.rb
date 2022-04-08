@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     post 'csv' => 'csv#index'
     post 'pdf' => 'pdf#index'
     resources :risks, except: [:edit]
-    resources :policies, except: [:edit]
+    resources :policies, except: [:edit] do
+      post 'published', on: :member
+      post 'archived', on: :member
+    end
 
     resources :exams, except: [:edit] do
       post 'completed', on: :member

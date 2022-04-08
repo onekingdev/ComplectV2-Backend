@@ -1,5 +1,4 @@
-class Api::RisksController < ApplicationController
-  before_action :authenticate_user!
+class Api::RisksController < Api::BaseController
   before_action :fetch_risk, only: [:show, :update, :destroy]
 
   def index

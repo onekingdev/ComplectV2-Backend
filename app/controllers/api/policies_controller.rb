@@ -1,9 +1,8 @@
-class Api::PoliciesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :fetch_policy, only: [:show, :update, :destroy]
+class Api::PoliciesController < Api::BaseController
+  before_action :fetch_policy, except: [:index, :create]
 
   def index
-    polices = Policy.all
+    polices = Policy.root
     render json: { polices: polices }
   end
 
@@ -29,6 +28,20 @@ class Api::PoliciesController < ApplicationController
   end
 
   def published
+    PublishPolicyService.new(policy_params, @policy, current_user).process
+    render json: { policy: @policy }
+  end
+
+  def archived
+    render json: { error: 'Can not process' }, status: :unprocessable_entity and return if params[:archived].nil?
+
+    policy = ArchivedPolicyService.new(params[:archived], @policy, current_user).process
+
+    if policy.errors.blank?
+      render json: { policy: policy }
+    else
+      render json: { errors: policy.errors }, status: :unprocessable_entity
+    end
   end
 
   def update_position
@@ -51,6 +64,6 @@ class Api::PoliciesController < ApplicationController
   end
 
   def policy_params
-    params.require(:policy).permit(:name, :impact, :likelihood, :level)
+    params.require(:policy).permit(:name, :description, :status)
   end
 end

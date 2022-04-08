@@ -1,19 +1,15 @@
 require 'swagger_helper'
 
 RSpec.describe 'Risks API' do
-  let(:user) { User.create(email: 'test@gmail.com', password: '123456789') }
-  let(:riskple_risk) do
-    Risk.create(
-      name: 'risk',
-      impact: 'high',
-      likelihood: 'high',
-      level: 'high',
-      user_id: user.id,
-      updated_by_id: user.id
-    )
-  end
+  include ApiHelper
+  let(:user) { create(:user) }
+  let(:example_risk) { create(:risk, user: user, updated_by: user) }
+  let(:token) { get_token(user) }
   
   path '/api/risks' do
+    parameter name: 'Authorization', in: :header, type: :string
+    let(:Authorization) { token }
+    
     get 'Risk list' do
       tags 'risks'
       consumes 'application/json'
@@ -35,9 +31,7 @@ RSpec.describe 'Risks API' do
           name: { type: :string },
           impact: { type: :string },
           likelihood: { type: :string },
-          level: { type: :string },
-          user_id: { type: :integer },
-          updated_by_id: { type: :integer }
+          level: { type: :string }
         },
         required: ['name', 'impact', 'likelihood', 'level']
       }
@@ -48,9 +42,7 @@ RSpec.describe 'Risks API' do
             name: 'risk',
             impact: 'high',
             likelihood: 'high',
-            level: 'high',
-            user_id: user.id,
-            updated_by_id: user.id
+            level: 'high'
           }
         end
         run_test!
@@ -65,10 +57,13 @@ RSpec.describe 'Risks API' do
 
   path '/api/risks/{id}' do
     parameter name: :id, in: :path, type: :integer
-
-    let(:id) { riskple_risk.id }
+    parameter name: 'Authorization', in: :header, type: :string
+    
+    let(:Authorization) { token }
+    let(:id) { example_risk.id }
+    
     get 'Retrieves a risk' do
-      tags 'risks'
+      tags 'Risks'
       produces 'application/json'
 
       response '200', 'risk found' do
@@ -90,7 +85,7 @@ RSpec.describe 'Risks API' do
     end
 
     put 'Update risk' do
-      tags 'risks'
+      tags 'Risks'
       consumes 'application/json'
       parameter name: :risk, in: :body, schema: {
         type: :object,
@@ -121,7 +116,7 @@ RSpec.describe 'Risks API' do
     end
 
     delete 'Delete risk' do
-      tags 'risks'
+      tags 'Risks'
       consumes 'application/json'
       response '200', 'deleted risk' do
         run_test!
