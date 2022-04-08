@@ -84,7 +84,7 @@ RSpec.describe 'Policies API' do
     let(:id) { example_policy.id }
     
     get 'Retrieves a policy' do
-      tags 'Policys'
+      tags 'Policies'
       produces 'application/json'
 
       response '200', 'policy found' do
@@ -105,7 +105,7 @@ RSpec.describe 'Policies API' do
     end
 
     put 'Update policy' do
-      tags 'Policys'
+      tags 'Policies'
       consumes 'application/json'
       parameter name: :policy, in: :body, schema: {
         type: :object,
@@ -132,9 +132,65 @@ RSpec.describe 'Policies API' do
     end
 
     delete 'Delete policy' do
-      tags 'Policys'
+      tags 'Policies'
       consumes 'application/json'
       response '200', 'deleted policy' do
+        run_test!
+      end
+    end
+  end
+
+  path '/api/policies/{id}/published' do
+    parameter name: :id, in: :path, type: :integer
+    parameter name: 'Authorization', in: :header, type: :string
+    
+    let(:Authorization) { token }
+    let(:id) { example_policy.id }
+    
+    post 'Published Policy' do
+      tags 'Policies'
+      consumes 'application/json'
+
+      parameter name: :policy, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string },
+          description: { type: :string }
+        }
+      }
+
+      response '200', 'published policy' do
+        let(:policy) { { name: 'change name policy' } }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['policy']['status']).to eq('published')
+        end
+      end
+    end
+  end
+
+  path '/api/policies/{id}/archived' do
+    parameter name: :id, in: :path, type: :integer
+    parameter name: 'Authorization', in: :header, type: :string
+    
+    let(:Authorization) { token }
+    let(:id) { example_policy.id }
+
+    post 'Archived policy' do
+      tags 'Policies'
+      consumes 'application/json'
+      parameter name: :archived, in: :body, type: :boolean, description: 'Params to decide archived/unarchived policy'
+
+      response '200', 'archived policy' do
+        let(:archived) { { archived: true } }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['policy']['status']).to eq('archived')
+        end
+      end
+
+      response '422', 'can not archived' do
+        let(:archived) { {} }
         run_test!
       end
     end
