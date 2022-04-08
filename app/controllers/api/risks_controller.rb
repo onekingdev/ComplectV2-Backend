@@ -44,6 +44,6 @@ class Api::RisksController < Api::BaseController
   end
 
   def risk_params
-    params.require(:risk).permit(:name, :impact, :likelihood, :level)
+    params.require(:risk).permit(:name, :impact, :likelihood, :level, policy_ids: [])
   end
 end

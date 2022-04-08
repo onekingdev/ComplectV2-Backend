@@ -7,8 +7,13 @@ Rails.application.routes.draw do
     post 'pdf' => 'pdf#index'
     resources :risks, except: [:edit]
     resources :policies, except: [:edit] do
-      post 'published', on: :member
-      post 'archived', on: :member
+      member do
+        post 'published'
+        post 'archived'
+      end
+      collection do
+        post 'update_position'
+      end
     end
 
     resources :exams, except: [:edit] do

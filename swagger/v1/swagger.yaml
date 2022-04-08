@@ -260,7 +260,130 @@ paths:
                   type: string
               required:
               - filename
+  "/api/policies":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Policy list
+      tags:
+      - policies
+      responses:
+        '200':
+          description: return policy list
+    post:
+      summary: Creates a policy
+      tags:
+      - policies
+      parameters: []
+      responses:
+        '201':
+          description: created policy
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+              required:
+              - name
+  "/api/policies/update_position":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    post:
+      summary: update position
+      tags:
+      - policies
+      parameters: []
+      responses:
+        '200':
+          description: updated position
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+  "/api/policies/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Retrieves a policy
+      tags:
+      - Policys
+      responses:
+        '200':
+          description: policy found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  status:
+                    type: string
+        '404':
+          description: policy not found
+    put:
+      summary: Update policy
+      tags:
+      - Policys
+      parameters: []
+      responses:
+        '200':
+          description: updated policy
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+    delete:
+      summary: Delete policy
+      tags:
+      - Policys
+      responses:
+        '200':
+          description: deleted policy
   "/api/risks":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     get:
       summary: Risk list
       tags:
@@ -292,10 +415,6 @@ paths:
                   type: string
                 level:
                   type: string
-                user_id:
-                  type: integer
-                updated_by_id:
-                  type: integer
               required:
               - name
               - impact
@@ -308,10 +427,14 @@ paths:
       required: true
       schema:
         type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
     get:
       summary: Retrieves a risk
       tags:
-      - risks
+      - Risks
       responses:
         '200':
           description: risk found
@@ -335,7 +458,7 @@ paths:
     put:
       summary: Update risk
       tags:
-      - risks
+      - Risks
       parameters: []
       responses:
         '200':
@@ -359,7 +482,7 @@ paths:
     delete:
       summary: Delete risk
       tags:
-      - risks
+      - Risks
       responses:
         '200':
           description: deleted risk

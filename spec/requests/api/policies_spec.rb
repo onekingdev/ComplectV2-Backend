@@ -1,7 +1,142 @@
-require 'rails_helper'
+require 'swagger_helper'
 
-RSpec.describe "Api::Policies", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+RSpec.describe 'Policies API' do
+  include ApiHelper
+  let(:user) { create(:user) }
+  let(:example_policy) { create(:policy, user: user, updated_by: user) }
+  let(:example_policy_2) { create(:policy, user: user, updated_by: user) }
+  let(:token) { get_token(user) }
+  path '/api/policies' do
+    parameter name: 'Authorization', in: :header, type: :string
+    let(:Authorization) { token }
+    
+    get 'Policy list' do
+      tags 'policies'
+      consumes 'application/json'
+
+      response '200', 'return policy list' do
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['policies']).not_to be_nil
+        end
+      end
+    end
+    
+    post 'Creates a policy' do
+      tags 'policies'
+      consumes 'application/json'
+      parameter name: :policy, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string },
+          description: { type: :string },
+          status: { type: :string }
+        },
+        required: ['name']
+      }
+
+      response '201', 'created policy' do
+        let(:policy) do
+          {
+            name: 'policy',
+            impact: 'high',
+            likelihood: 'high',
+            level: 'high'
+          }
+        end
+        run_test!
+      end
+
+      response '422', 'invalid request' do
+        let(:policy) { { name: '' } }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/policies/update_position' do
+    parameter name: 'Authorization', in: :header, type: :string
+    let(:Authorization) { token }
+
+    post 'update position' do
+      tags 'policies'
+      consumes 'application/json'
+      parameter name: :positions, in: :body, type: :array
+      response '200', 'updated position' do
+        let(:positions) do
+          {
+            positions: [
+              { "id": example_policy_2.id, "position": example_policy.position },
+              { "id": example_policy.id, "position": example_policy_2.position }
+            ]
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/api/policies/{id}' do
+    parameter name: :id, in: :path, type: :integer
+    parameter name: 'Authorization', in: :header, type: :string
+    
+    let(:Authorization) { token }
+    let(:id) { example_policy.id }
+    
+    get 'Retrieves a policy' do
+      tags 'Policys'
+      produces 'application/json'
+
+      response '200', 'policy found' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer },
+            name: { type: :string },
+            description: { type: :string },
+            status: { type: :string }
+          }
+        run_test!
+      end
+
+      response '404', 'policy not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+    end
+
+    put 'Update policy' do
+      tags 'Policys'
+      consumes 'application/json'
+      parameter name: :policy, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string },
+          description: { type: :string },
+          status: { type: :string }
+        }
+      }
+
+      response '200', 'updated policy' do
+        let(:policy) do
+          {
+            name: 'new policy'
+          }
+        end
+        run_test!
+      end
+
+      response '422', 'invalid request' do
+        let(:policy) { { name: '' } }
+        run_test!
+      end
+    end
+
+    delete 'Delete policy' do
+      tags 'Policys'
+      consumes 'application/json'
+      response '200', 'deleted policy' do
+        run_test!
+      end
+    end
   end
 end

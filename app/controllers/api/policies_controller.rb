@@ -1,9 +1,9 @@
 class Api::PoliciesController < Api::BaseController
-  before_action :fetch_policy, except: [:index, :create]
+  before_action :fetch_policy, except: [:index, :create, :update_position]
 
   def index
-    polices = Policy.root
-    render json: { polices: polices }
+    policies = Policy.root
+    render json: { policies: policies }
   end
 
   def show
@@ -45,6 +45,15 @@ class Api::PoliciesController < Api::BaseController
   end
 
   def update_position
+    if params[:positions].present?
+      params[:positions].each do |item|
+        policy = Policy.find_by(id: item['id'])
+        policy&.update_attribute('position', item['position'])
+      end
+      render json: { message: 'success' }
+    else
+      render json: { message: 'error' }, status: :unprocessable_entity
+    end
   end
 
   def destroy
