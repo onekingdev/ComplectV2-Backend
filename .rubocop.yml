@@ -159,7 +159,7 @@ Style/ColonMethodCall:
   Enabled: true
 
 Style/HashSyntax:
-  Enabled: true
+  Enabled: false
 
 Style/Documentation:
   Enabled: false

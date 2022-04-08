@@ -43,24 +43,34 @@ jobs:
       - name: Create DB
         env:
           RAILS_ENV: test
+          ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: ${{secrets.ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY}}
+          ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: ${{secrets.ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY}}
+          ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: ${{secrets.ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT}}
+          DEVISE_JWT_SECRET_KEY: ${{secrets.DEVISE_JWT_SECRET_KEY}}
+          OTP_SECRET_KEY: ${{secrets.OTP_SECRET_KEY}}
           POSTGRES_PASSWORD: postgres
         run: |
           bin/rails db:prepare
       - name: Run tests
         env:
           RAILS_ENV: test
+          ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY: ${{secrets.ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY}}
+          ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY: ${{secrets.ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY}}
+          ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT: ${{secrets.ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT}}
+          DEVISE_JWT_SECRET_KEY: ${{secrets.DEVISE_JWT_SECRET_KEY}}
+          OTP_SECRET_KEY: ${{secrets.OTP_SECRET_KEY}}
           POSTGRES_PASSWORD: postgres
         run: |
           bundle exec rspec
       - name: Rubocop
         run: bundle exec rubocop
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "complect-v2-demo"
-          heroku_email: "kourindouhime@gmail.com"
-          branch: demo
+      - name: Login to Heroku Container registry
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Unshallow Clone
+        run: git reset --hard HEAD; git fetch --all --unshallow; git filter-branch -- --all
+      - name: Push to heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/complect-v2-demo.git HEAD:master --force
