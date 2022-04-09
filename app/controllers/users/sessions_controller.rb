@@ -25,7 +25,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    render json: { auth_token: Warden::JWTAuth::UserEncoder.new.call(resource, :users, nil).first }, status: :ok
+    render json: { auth_token: Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil).first }, status: :ok
   end
 
   def respond_to_on_destroy
