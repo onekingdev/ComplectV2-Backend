@@ -203,7 +203,7 @@ Metrics/ClassLength:
   Enabled: false
 
 Metrics/LineLength:
-  Enabled: false
+  Enabled: true
 
 Metrics/AbcSize:
   Enabled: false
