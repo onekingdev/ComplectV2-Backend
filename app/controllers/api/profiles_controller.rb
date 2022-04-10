@@ -1,11 +1,11 @@
-class ProfilesController < Api::BaseController
+class Api::ProfilesController < Api::BaseController
   before_action :get_profile
 
   def update
     if @profile.update(profile_params)
-      respond_with @profile, serializer: ProfileSerializer
+      render json: @profile, serializer: ProfileSerializer
     else
-      respond_with errors: @profile.errors, status: :unprocessable_entity
+      render json: { errors: @profile.errors, status: :unprocessable_entity }
     end
   end
 

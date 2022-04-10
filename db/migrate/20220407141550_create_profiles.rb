@@ -14,8 +14,8 @@ class CreateProfiles < ActiveRecord::Migration[7.0]
       t.boolean :availability
       t.boolean :former_regulator
       t.decimal :hourly_rate
-      t.jsonb :avatar
-      t.jsonb :file
+      t.jsonb :avatar_data
+      t.jsonb :file_data
 
       t.timestamps
     end

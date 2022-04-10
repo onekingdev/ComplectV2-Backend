@@ -6,8 +6,10 @@ Rails.application.routes.draw do
     post 'csv' => 'csv#index'
     post 'pdf' => 'pdf#index'
 
-    resources :profiles, only: [:update, :show]
-    resources :businesses, only: [:update, :show]
+    patch "/profile" => 'profiles#update'
+    get "/profile" => "profiles#show"
+    patch "/business" => 'businesses#update'
+    get "/business" => 'businesses#show'
     resources :exams, except: [:edit] do
       post 'completed', on: :member
       resources :share_exams, only: [:index, :create, :destroy]

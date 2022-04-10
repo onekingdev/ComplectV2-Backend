@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_07_150001) do
     t.string "state"
     t.string "zipcode"
     t.integer "user_id"
-    t.jsonb "logo"
+    t.jsonb "logo_data"
     t.integer "payment_method_id"
     t.string "stripe_customer_id"
     t.datetime "created_at", null: false
@@ -90,8 +90,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_07_150001) do
     t.boolean "availability"
     t.boolean "former_regulator"
     t.decimal "hourly_rate"
-    t.jsonb "avatar"
-    t.jsonb "file"
+    t.jsonb "avatar_data"
+    t.jsonb "file_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
