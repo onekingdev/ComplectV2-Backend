@@ -11,7 +11,7 @@ RSpec.describe 'Policies API' do
     let(:Authorization) { token }
     
     get 'Policy list' do
-      tags 'policies'
+      tags 'Policies'
       consumes 'application/json'
 
       response '200', 'return policy list' do
@@ -23,7 +23,7 @@ RSpec.describe 'Policies API' do
     end
     
     post 'Creates a policy' do
-      tags 'policies'
+      tags 'Policies'
       consumes 'application/json'
       parameter name: :policy, in: :body, schema: {
         type: :object,
@@ -59,11 +59,16 @@ RSpec.describe 'Policies API' do
     let(:Authorization) { token }
 
     post 'update position' do
-      tags 'policies'
+      tags 'Policies'
       consumes 'application/json'
-      parameter name: :positions, in: :body, type: :array
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          positions: { type: :array }
+        }
+      }
       response '200', 'updated position' do
-        let(:positions) do
+        let(:params) do
           {
             positions: [
               { "id": example_policy_2.id, "position": example_policy.position },
@@ -176,13 +181,19 @@ RSpec.describe 'Policies API' do
     let(:Authorization) { token }
     let(:id) { example_policy.id }
 
-    post 'Archived policy' do
+    post 'Archived/Unarchived policy' do
       tags 'Policies'
       consumes 'application/json'
-      parameter name: :archived, in: :body, type: :boolean, description: 'Params to decide archived/unarchived policy'
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          archived: { type: :boolean }
+        },
+        description: 'Set true for archived and false for unarchived'
+      }
 
       response '200', 'archived policy' do
-        let(:archived) { { archived: true } }
+        let(:params) { { archived: true } }
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data['policy']['status']).to eq('archived')
@@ -190,7 +201,7 @@ RSpec.describe 'Policies API' do
       end
 
       response '422', 'can not archived' do
-        let(:archived) { {} }
+        let(:params) { {} }
         run_test!
       end
     end

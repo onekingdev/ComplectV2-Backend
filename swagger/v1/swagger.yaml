@@ -269,14 +269,14 @@ paths:
     get:
       summary: Policy list
       tags:
-      - policies
+      - Policies
       responses:
         '200':
           description: return policy list
     post:
       summary: Creates a policy
       tags:
-      - policies
+      - Policies
       parameters: []
       responses:
         '201':
@@ -306,7 +306,7 @@ paths:
     post:
       summary: update position
       tags:
-      - policies
+      - Policies
       parameters: []
       responses:
         '200':
@@ -315,7 +315,10 @@ paths:
         content:
           application/json:
             schema:
-              type: array
+              type: object
+              properties:
+                positions:
+                  type: array
   "/api/policies/{id}":
     parameters:
     - name: id
@@ -419,7 +422,7 @@ paths:
       schema:
         type: string
     post:
-      summary: Archived policy
+      summary: Archived/Unarchived policy
       tags:
       - Policies
       parameters: []
@@ -432,7 +435,11 @@ paths:
         content:
           application/json:
             schema:
-              type: boolean
+              type: object
+              properties:
+                archived:
+                  type: boolean
+              description: Set true for archived and false for unarchived
   "/api/risks":
     parameters:
     - name: Authorization
@@ -442,14 +449,14 @@ paths:
     get:
       summary: Risk list
       tags:
-      - risks
+      - Risks
       responses:
         '200':
           description: return risk list
     post:
       summary: Creates a risk
       tags:
-      - risks
+      - Risks
       parameters: []
       responses:
         '201':
@@ -470,6 +477,8 @@ paths:
                   type: string
                 level:
                   type: string
+                policy_ids:
+                  type: array
               required:
               - name
               - impact

@@ -11,7 +11,7 @@ RSpec.describe 'Risks API' do
     let(:Authorization) { token }
     
     get 'Risk list' do
-      tags 'risks'
+      tags 'Risks'
       consumes 'application/json'
 
       response '200', 'return risk list' do
@@ -23,7 +23,7 @@ RSpec.describe 'Risks API' do
     end
     
     post 'Creates a risk' do
-      tags 'risks'
+      tags 'Risks'
       consumes 'application/json'
       parameter name: :risk, in: :body, schema: {
         type: :object,
