@@ -321,6 +321,140 @@ paths:
       responses:
         '200':
           description: remove share exam
+  "/users":
+    post:
+      description: "Register"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    kind:
+                      type: string
+                    profile_attributes:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+  "/users/sign_in":
+    post:
+      description: "Sign in"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    otp_attempt:
+                      type: string
+  "/api/profile":
+    get:
+      description: "Retrieve existing profile data"
+    patch:
+      description: "Update profile (onboarding stage for specialist, or through settings tab)"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    time_zone:
+                      type: string
+                    address:
+                      type: string
+                    apt_unit:
+                      type: string
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    phone_number:
+                      type: string
+                    zipcode:
+                      type: string
+                    availability:
+                      type: boolean
+                    former_regulator:
+                      type: boolean
+                    hourly_rate:
+                      type: integer
+                    avatar:
+                      type: string
+                    file:
+                      type: string
+                    experience:
+                      type: integer
+                    show_full_name:
+                      type: boolean
+                    regulatory_body_list:
+                      type: string
+  "/api/business":
+    get:
+      description: "Retrieve existing business data"
+    patch:
+      description: "Update business (onboarding stage for employee, or through settings tab)"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                business:
+                  type: object
+                  properties:
+                    business_name:
+                      type: string
+                    crd:
+                      type: string
+                    aum:
+                      type: integer
+                    accounts:
+                      type: integer
+                    time_zone:
+                      type: string
+                    phone_number:
+                      type: string
+                    website:
+                      type: string
+                    address:
+                      type: string
+                    apt_unit:
+                      type: string
+                    city:
+                      type: string
+                    state:
+                      type: string
+                    zipcode:
+                      type: string
+                    logo:
+                      type: string
+  "/api/regulatory_bodies":
+    get:
+      description: "Get regulatory bodies tag list for profiles"
 servers:
 - url: http://{defaultHost}
   variables:
