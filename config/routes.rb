@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :share_exams, only: [:index, :create, :destroy]
       resources :exam_requests, except: [:edit]
     end
+
+    resources :work_experiences, except: :edit
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :exams
   has_many :exam_requests
   has_many :share_exams
+  has_many :work_experiences
 end
