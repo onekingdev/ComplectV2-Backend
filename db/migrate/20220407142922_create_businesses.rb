@@ -13,7 +13,7 @@ class CreateBusinesses < ActiveRecord::Migration[7.0]
       t.string :city
       t.string :state
       t.string :zipcode
-      t.integer :user_id
+      t.references :user
       t.jsonb :logo_data
       t.integer :payment_method_id
       t.string :stripe_customer_id

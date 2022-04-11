@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_one :business
   accepts_nested_attributes_for :profile
 
+  validates :kind, presence: true
+
   enum kind: { specialist: 'specialist', employee: 'employee' }
 
   def send_otp

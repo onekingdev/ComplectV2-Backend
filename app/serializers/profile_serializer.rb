@@ -14,6 +14,8 @@ class ProfileSerializer < ApplicationSerializer
              :hourly_rate,
              :avatar,
              :file,
+             :show_full_name,
+             :boolean,
              :created_at,
              :updated_at
 

@@ -3,7 +3,7 @@ class CreateProfiles < ActiveRecord::Migration[7.0]
     create_table :profiles do |t|
       t.string :first_name
       t.string :last_name
-      t.integer :user_id
+      t.references :user
       t.string :time_zone
       t.string :address
       t.string :apt_unit

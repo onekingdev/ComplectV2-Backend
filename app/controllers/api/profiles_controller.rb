@@ -22,6 +22,6 @@ class Api::ProfilesController < Api::BaseController
   def profile_params
     params.require(:profile).permit(:first_name, :last_name, :time_zone, :address, :apt_unit, :city, :state,
                                     :phone_number, :zipcode, :availability, :former_regulator, :hourly_rate,
-                                    :avatar, :file)
+                                    :avatar, :file, :experience, :show_full_name)
   end
 end
