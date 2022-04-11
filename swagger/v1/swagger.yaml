@@ -321,6 +321,126 @@ paths:
       responses:
         '200':
           description: remove share exam
+  "/api/work_experiences":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Work Experience list
+      tags:
+      - Work Experiences
+      responses:
+        '200':
+          description: return work_experience list
+    post:
+      summary: Creates a work_experience
+      tags:
+      - Work Experiences
+      parameters: []
+      responses:
+        '201':
+          description: created work_experience
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                employer:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                is_present:
+                  type: boolean
+                description:
+                  type: string
+              required:
+              - title
+              - employer
+              - starts_on
+              - ends_on
+  "/api/work_experiences/{id}":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a work_experience
+      tags:
+      - Work Experiences
+      responses:
+        '200':
+          description: Work Experience found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  employer:
+                    type: string
+                  starts_on:
+                    type: string
+                  ends_on:
+                    type: string
+                  is_present:
+                    type: boolean
+                  description:
+                    type: string
+        '404':
+          description: work_experience not found
+    put:
+      summary: Update Work Experience
+      tags:
+      - Work Experiences
+      parameters: []
+      responses:
+        '200':
+          description: updated work_experience
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                employer:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                is_present:
+                  type: boolean
+                description:
+                  type: string
+    delete:
+      summary: Delete Work Experience
+      tags:
+      - Work Experiences
+      responses:
+        '200':
+          description: deleted work_experience
 servers:
 - url: http://{defaultHost}
   variables:
