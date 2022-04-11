@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "/profile" => "profiles#show"
     patch "/business" => 'businesses#update'
     get "/business" => 'businesses#show'
+    get "/regulatory_bodies" => 'regulatory_bodies#index'
     resources :exams, except: [:edit] do
       post 'completed', on: :member
       resources :share_exams, only: [:index, :create, :destroy]

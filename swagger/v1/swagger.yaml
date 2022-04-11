@@ -406,6 +406,12 @@ paths:
                       type: string
                     file:
                       type: string
+                    experience:
+                      type: integer
+                    show_full_name:
+                      type: boolean
+                    regulatory_body_list:
+                      type: string
   "/api/business":
     get:
       description: "Retrieve existing business data"
@@ -446,6 +452,9 @@ paths:
                       type: string
                     logo:
                       type: string
+  "/api/regulatory_bodies":
+    get:
+      description: "Get regulatory bodies tag list for profiles"
 servers:
 - url: http://{defaultHost}
   variables:
