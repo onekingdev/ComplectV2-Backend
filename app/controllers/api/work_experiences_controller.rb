@@ -1,8 +1,9 @@
 class Api::WorkExperiencesController < Api::BaseController
+  before_action :fetch_profile
   before_action :fetch_work_experience, except: [:index, :create]
 
   def index
-    work_experiences = current_user.work_experiences
+    work_experiences = @profile.work_experiences
     render json: { work_experiences: work_experiences }
   end
 
@@ -11,7 +12,7 @@ class Api::WorkExperiencesController < Api::BaseController
   end
 
   def create
-    work_experience = current_user.work_experiences.create(work_experience_params)
+    work_experience = @profile.work_experiences.create(work_experience_params)
     if work_experience.id
       render json: { work_experience: work_experience }, status: :created
     else
@@ -38,9 +39,13 @@ class Api::WorkExperiencesController < Api::BaseController
   private
 
   def fetch_work_experience
-    @work_experience = current_user.work_experiences.find(params[:id])
+    @work_experience = @profile.work_experiences.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
     render json: { error: e.to_s }, status: :not_found
+  end
+
+  def fetch_profile
+    @profile = current_user.profile
   end
 
   def work_experience_params

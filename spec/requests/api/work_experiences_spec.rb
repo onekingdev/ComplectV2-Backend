@@ -1,7 +1,14 @@
 require 'swagger_helper'
 RSpec.describe 'Api::WorkExperiences', type: :request do
   include ApiHelper
-  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current) }
+  # let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current, kind: 'specialist') }
+  # let(:profile) { user.profile.create(first_name: 'David', last_name: 'Smith') }
+  let(:user) do
+    user = User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current, kind: 'specialist')
+    user.create_profile(first_name: 'David', last_name: 'Smith')
+
+    user
+  end
   let(:token) { get_token(user) }
   
   path '/api/work_experiences' do
@@ -68,7 +75,7 @@ RSpec.describe 'Api::WorkExperiences', type: :request do
         employer: 'Complect',
         starts_on: Time.current - 1.year,
         ends_on: Time.current - 4.months,
-        user: user
+        profile: user.profile
       )
     end
 

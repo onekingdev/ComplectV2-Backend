@@ -1,5 +1,5 @@
 class WorkExperience < ApplicationRecord
-  belongs_to :user
+  belongs_to :profile
 
   validates :title, :employer, :starts_on, presence: true
   validates :title, :employer, length: { maximum: 255 }

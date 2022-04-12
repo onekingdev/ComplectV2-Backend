@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe WorkExperience, type: :model do
-  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current) }
+  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current, kind: 'specialist') }
+  let(:profile) { Profile.create(first_name: 'test', last_name: 'complect', user: user) }
   describe 'associations' do
-    it { should belong_to(:user) }
+    it { should belong_to(:profile) }
   end
 
   describe 'validations' do
@@ -20,7 +21,7 @@ RSpec.describe WorkExperience, type: :model do
       title: 'Ruby',
       employer: 'complect', 
       starts_on: Time.current - 1.year,
-      user: user
+      profile: profile
     )
     expect(work_experience.errors.full_messages).to include("Ends on can't be blank")
   end
@@ -31,7 +32,7 @@ RSpec.describe WorkExperience, type: :model do
       employer: 'complect', 
       starts_on: Time.current - 1.year,
       is_present: true,
-      user: user
+      profile: profile
     )
 
     expect(work_experience.errors.full_messages).to be_empty
@@ -43,7 +44,7 @@ RSpec.describe WorkExperience, type: :model do
       employer: 'complect', 
       starts_on: Time.current - 1.year,
       ends_on: Time.current - 2.year,
-      user: user
+      profile: profile
     )
 
     expect(work_experience.errors.full_messages).to include("Starts on can't be greater than end date.")

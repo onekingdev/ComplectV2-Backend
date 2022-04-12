@@ -203,7 +203,7 @@ Metrics/ClassLength:
   Enabled: false
 
 Metrics/LineLength:
-  Enabled: false
+  Enabled: true
 
 Metrics/AbcSize:
   Enabled: false
@@ -226,6 +226,9 @@ Metrics/ModuleLength:
 # === Lint ===
 
 Lint/Debugger:
+  Enabled: false
+
+Lint/Void:
   Enabled: false
 
 # === Naming ===
