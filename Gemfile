@@ -6,6 +6,17 @@ ruby "3.1.1"
 # db
 gem 'pg'
 
+# serializers
+gem 'active_model_serializers'
+
+# tags
+gem 'acts-as-taggable-on', '~> 9.0'
+
+# storage and images
+gem 'shrine'
+gem 'mini_magick'
+gem 'image_processing'
+
 # Code style and errors inspection officer, testing
 gem "rspec-rails"
 gem 'rubocop'

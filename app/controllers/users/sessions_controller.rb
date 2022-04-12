@@ -12,17 +12,20 @@ class Users::SessionsController < Devise::SessionsController
 
     user.update!(otp_secret: User.generate_otp_secret) if user.otp_secret.nil?
     if params[:user][:otp_attempt].blank?
-      puts "\n**** OTP: ****\n*   #{user.current_otp}   *\n**************\n\n" if Rails.env == "development"
-      OtpMailer.send_otp(user.email, user.current_otp).deliver_later if Rails.env != "development"
+      user.send_otp
       return render json: { error: "Missing OTP" }
     end
-    super
+    self.resource = warden.authenticate!(auth_options)
+    # set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+    respond_with resource, location: after_sign_in_path_for(resource)
   end
 
   private
 
   def respond_with(resource, _opts = {})
-    render json: { message: 'Signed in.' }, status: :ok
+    render json: { auth_token: Warden::JWTAuth::UserEncoder.new.call(resource, :user, nil).first }, status: :ok
   end
 
   def respond_to_on_destroy
