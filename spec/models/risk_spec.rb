@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Risk, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should belong_to(:business) }
     it { should belong_to(:updated_by).class_name('User') }
     it { should have_many(:risk_policies) }
     it { should have_many(:policies) }

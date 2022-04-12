@@ -1,5 +1,6 @@
 class Risk < ApplicationRecord
   belongs_to :user
+  belongs_to :business
   belongs_to :updated_by, class_name: 'User', foreign_key: 'updated_by_id'
   has_many :risk_policies
   has_many :policies, through: :risk_policies

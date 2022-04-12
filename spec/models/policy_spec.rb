@@ -5,6 +5,7 @@ RSpec.describe Policy, type: :model do
 
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should belong_to(:business) }
     it { should belong_to(:updated_by).class_name('User') }
     it { should belong_to(:published_by).class_name('User').optional }
     it { should belong_to(:archived_by).class_name('User').optional }
