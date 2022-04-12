@@ -323,13 +323,17 @@ paths:
           description: remove share exam
   "/users":
     post:
-      description: "Register"
+      tags:
+      - Sign up, sign in and onboarding
+      description: "Register. 3 ways:\n 1. Specialist sign up requires kind: specialist.\n 2. Business sign up requires kind: employee.\n 3. Employee sign up requires invite_hash and kind: employee."
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
+                invite_hash:
+                  type: string
                 user:
                   type: object
                   properties:
@@ -348,6 +352,8 @@ paths:
                           type: string
   "/users/sign_in":
     post:
+      tags:
+      - Sign up, sign in and onboarding
       description: "Sign in"
       requestBody:
         content:
@@ -366,8 +372,12 @@ paths:
                       type: string
   "/api/profile":
     get:
+      tags:
+      - Sign up, sign in and onboarding
       description: "Retrieve existing profile data"
     patch:
+      tags:
+      - Sign up, sign in and onboarding
       description: "Update profile (onboarding stage for specialist, or through settings tab)"
       requestBody:
         content:
@@ -414,8 +424,12 @@ paths:
                       type: string
   "/api/business":
     get:
+      tags:
+      - Sign up, sign in and onboarding
       description: "Retrieve existing business data"
     patch:
+      tags:
+      - Sign up, sign in and onboarding
       description: "Update business (onboarding stage for employee, or through settings tab)"
       requestBody:
         content:
@@ -454,7 +468,77 @@ paths:
                       type: string
   "/api/regulatory_bodies":
     get:
+      tags:
+      - Sign up, sign in and onboarding
       description: "Get regulatory bodies tag list for profiles"
+  "/api/employees":
+    get:
+      tags:
+      - Employees
+      description: "Retrieve list of employees."
+    post:
+      tags:
+      - Employees
+      description: "Invite an employee to organization."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employee:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    invite_email:
+                      type: string
+                    disabled_reason:
+                      type: string
+                    additional_reason:
+                      type: text
+                    access_person:
+                      type: boolean
+                    role:
+                      type: string
+                    active:
+                      type: boolean
+  "/api/employees/{employee_id}":
+    patch:
+      tags:
+      - Employees
+      description: "Edit existing employee."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                employee:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    invite_email:
+                      type: string
+                    disabled_reason:
+                      type: string
+                    additional_reason:
+                      type: text
+                    access_person:
+                      type: boolean
+                    role:
+                      type: string
+                    active:
+                      type: boolean
+    delete:
+      tags:
+      - Employees
+      description: "Destroy existing employee."
 servers:
 - url: http://{defaultHost}
   variables:

@@ -23,6 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                   start_date: Time.zone.now,
                                   role: "admin",
                                   user_id: resource.id,
+                                  active: true,
                                   business_id: resource.business.id).save
         end
       end
