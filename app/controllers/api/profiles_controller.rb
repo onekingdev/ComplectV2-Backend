@@ -5,7 +5,7 @@ class Api::ProfilesController < Api::BaseController
     if @profile.update(profile_params)
       render json: @profile, serializer: ProfileSerializer
     else
-      render json: { errors: @profile.errors, status: :unprocessable_entity }
+      render json: { errors: @profile.errors }, status: :unprocessable_entity
     end
   end
 
