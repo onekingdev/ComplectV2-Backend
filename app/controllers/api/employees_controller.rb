@@ -7,8 +7,6 @@ class Api::EmployeesController < Api::BaseController
 
   def create
     employee = @business.employees.build(employee_params.merge(invite_hash: SecureRandom.uuid))
-    puts "BUILD EMPLOYEE WITH INVITE HASH"
-    puts employee.inspect
     if employee.save
       puts "**** Invite hash: ****\n#{employee.invite_hash}\n**********************" if Rails.env == "development"
       EmployeeMailer.send_invite(employee.invite_email, employee.invite_hash) if Rails.env != "development"
