@@ -2,17 +2,9 @@ require 'swagger_helper'
 
 RSpec.describe 'Share Exam API' do
   include ApiHelper
-  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current) }
+  let(:exam) { create(:exam, user: user, updated_by: user) }
+  let(:user) { create(:user) }
   let(:token) { get_token(user) }
-  let(:exam) do
-    Exam.create(
-      name: 'test',
-      starts_on: Time.current,
-      ends_on: Time.current + 3.days,
-      user_id: user.id,
-      updated_by_id: user.id
-    )
-  end
 
   path '/api/exams/{exam_id}/share_exams' do
     parameter name: :exam_id, in: :path, type: :integer

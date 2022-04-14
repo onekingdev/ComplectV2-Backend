@@ -1,8 +1,8 @@
 require 'swagger_helper'
 RSpec.describe 'Exams API', type: :request do
   include ApiHelper
-  let(:example_exam) { Exam.create(name: 'test', starts_on: Time.current, ends_on: Time.current + 10.days, user: user, updated_by: user ) }
-  let(:user) { User.create(email: 'complect@gmail.com', password: '123456789', confirmed_at: Time.current) }
+  let(:example_exam) { create(:exam, user: user, updated_by: user) }
+  let(:user) { create(:user) }
   let(:token) { get_token(user) }
   
   path '/api/exams' do
