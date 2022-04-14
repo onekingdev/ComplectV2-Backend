@@ -611,224 +611,126 @@ paths:
       responses:
         '200':
           description: remove share exam
-  "/users":
-    post:
+  "/api/work_experiences":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Work Experience list
       tags:
-      - Sign up, sign in and onboarding
-      description: "Register. 3 ways:\n 1. Specialist sign up requires kind: specialist.\n 2. Business sign up requires kind: employee.\n 3. Employee sign up requires invite_hash and kind: employee."
+      - Work Experiences
+      responses:
+        '200':
+          description: return work_experience list
+    post:
+      summary: Creates a work_experience
+      tags:
+      - Work Experiences
+      parameters: []
+      responses:
+        '201':
+          description: created work_experience
+        '422':
+          description: invalid request
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                invite_hash:
+                title:
                   type: string
-                user:
-                  type: object
-                  properties:
-                    email:
-                      type: string
-                    password:
-                      type: string
-                    kind:
-                      type: string
-                    profile_attributes:
-                      type: object
-                      properties:
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-  "/users/sign_in":
-    post:
-      tags:
-      - Sign up, sign in and onboarding
-      description: "Sign in"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user:
-                  type: object
-                  properties:
-                    email:
-                      type: string
-                    password:
-                      type: string
-                    otp_attempt:
-                      type: string
-  "/api/profile":
+                employer:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                is_present:
+                  type: boolean
+                description:
+                  type: string
+              required:
+              - title
+              - employer
+              - starts_on
+              - ends_on
+  "/api/work_experiences/{id}":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
     get:
+      summary: Retrieves a work_experience
       tags:
-      - Sign up, sign in and onboarding
-      description: "Retrieve existing profile data"
-    patch:
+      - Work Experiences
+      responses:
+        '200':
+          description: Work Experience found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  employer:
+                    type: string
+                  starts_on:
+                    type: string
+                  ends_on:
+                    type: string
+                  is_present:
+                    type: boolean
+                  description:
+                    type: string
+        '404':
+          description: work_experience not found
+    put:
+      summary: Update Work Experience
       tags:
-      - Sign up, sign in and onboarding
-      description: "Update profile (onboarding stage for specialist, or through settings tab)"
+      - Work Experiences
+      parameters: []
+      responses:
+        '200':
+          description: updated work_experience
+        '422':
+          description: invalid request
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                profile:
-                  type: object
-                  properties:
-                    first_name:
-                      type: string
-                    last_name:
-                      type: string
-                    time_zone:
-                      type: string
-                    address:
-                      type: string
-                    apt_unit:
-                      type: string
-                    city:
-                      type: string
-                    state:
-                      type: string
-                    phone_number:
-                      type: string
-                    zipcode:
-                      type: string
-                    availability:
-                      type: boolean
-                    former_regulator:
-                      type: boolean
-                    hourly_rate:
-                      type: integer
-                    avatar:
-                      type: string
-                    file:
-                      type: string
-                    experience:
-                      type: integer
-                    show_full_name:
-                      type: boolean
-                    regulatory_body_list:
-                      type: string
-  "/api/business":
-    get:
-      tags:
-      - Sign up, sign in and onboarding
-      description: "Retrieve existing business data"
-    patch:
-      tags:
-      - Sign up, sign in and onboarding
-      description: "Update business (onboarding stage for employee, or through settings tab)"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                business:
-                  type: object
-                  properties:
-                    business_name:
-                      type: string
-                    crd:
-                      type: string
-                    aum:
-                      type: integer
-                    accounts:
-                      type: integer
-                    time_zone:
-                      type: string
-                    phone_number:
-                      type: string
-                    website:
-                      type: string
-                    address:
-                      type: string
-                    apt_unit:
-                      type: string
-                    city:
-                      type: string
-                    state:
-                      type: string
-                    zipcode:
-                      type: string
-                    logo:
-                      type: string
-  "/api/regulatory_bodies":
-    get:
-      tags:
-      - Sign up, sign in and onboarding
-      description: "Get regulatory bodies tag list for profiles"
-  "/api/employees":
-    get:
-      tags:
-      - Employees
-      description: "Retrieve list of employees."
-    post:
-      tags:
-      - Employees
-      description: "Invite an employee to organization."
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                employee:
-                  type: object
-                  properties:
-                    first_name:
-                      type: string
-                    last_name:
-                      type: string
-                    invite_email:
-                      type: string
-                    disabled_reason:
-                      type: string
-                    additional_reason:
-                      type: text
-                    access_person:
-                      type: boolean
-                    role:
-                      type: string
-                    active:
-                      type: boolean
-  "/api/employees/{employee_id}":
-    patch:
-      tags:
-      - Employees
-      description: "Edit existing employee."
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                employee:
-                  type: object
-                  properties:
-                    first_name:
-                      type: string
-                    last_name:
-                      type: string
-                    invite_email:
-                      type: string
-                    disabled_reason:
-                      type: string
-                    additional_reason:
-                      type: text
-                    access_person:
-                      type: boolean
-                    role:
-                      type: string
-                    active:
-                      type: boolean
+                title:
+                  type: string
+                employer:
+                  type: string
+                starts_on:
+                  type: string
+                ends_on:
+                  type: string
+                is_present:
+                  type: boolean
+                description:
+                  type: string
     delete:
+      summary: Delete Work Experience
       tags:
-      - Employees
-      description: "Destroy existing employee."
+      - Work Experiences
+      responses:
+        '200':
+          description: deleted work_experience
 servers:
 - url: http://{defaultHost}
   variables:

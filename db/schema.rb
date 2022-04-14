@@ -239,5 +239,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "work_experiences", force: :cascade do |t|
+    t.bigint "profile_id"
+    t.string "title", null: false
+    t.string "employer", null: false
+    t.text "description"
+    t.datetime "starts_on", null: false
+    t.datetime "ends_on"
+    t.boolean "is_present"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_work_experiences_on_profile_id"
+  end
+
   add_foreign_key "taggings", "tags"
 end
