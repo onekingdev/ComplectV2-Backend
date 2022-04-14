@@ -5,6 +5,16 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     post 'csv' => 'csv#index'
     post 'pdf' => 'pdf#index'
+    resources :risks, except: [:edit]
+    resources :policies, except: [:edit] do
+      member do
+        post 'published'
+        post 'archived'
+      end
+      collection do
+        post 'update_position'
+      end
+    end
 
     patch "/profile" => 'profiles#update'
     get "/profile" => "profiles#show"
