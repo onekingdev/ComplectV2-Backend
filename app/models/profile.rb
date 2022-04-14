@@ -7,4 +7,6 @@ class Profile < ApplicationRecord
 
   include ImageUploader[:file]
   include ImageUploader[:avatar]
+
+  enum experience: { junior: 'junior', intermediate: 'intermediate', expert: 'expert' }
 end

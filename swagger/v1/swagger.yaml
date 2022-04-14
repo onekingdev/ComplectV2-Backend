@@ -417,7 +417,7 @@ paths:
                     file:
                       type: string
                     experience:
-                      type: integer
+                      type: string
                     show_full_name:
                       type: boolean
                     regulatory_body_list:
