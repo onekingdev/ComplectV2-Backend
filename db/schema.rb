@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_171633) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_171633) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_businesses_on_user_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "invite_email"
+    t.datetime "start_date"
+    t.datetime "disabled_at"
+    t.string "disabled_reason"
+    t.text "additional_reason"
+    t.boolean "access_person"
+    t.string "role"
+    t.boolean "active"
+    t.string "invite_hash"
+    t.bigint "user_id"
+    t.bigint "business_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_employees_on_business_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "exam_requests", force: :cascade do |t|
@@ -77,6 +97,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_171633) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
+  create_table "policies", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "position"
+    t.string "status", default: "draft"
+    t.integer "src_id"
+    t.datetime "published_at"
+    t.integer "published_by_id"
+    t.datetime "archived_at"
+    t.integer "archived_by_id"
+    t.integer "business_id"
+    t.bigint "user_id"
+    t.integer "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archived_by_id"], name: "index_policies_on_archived_by_id"
+    t.index ["business_id"], name: "index_policies_on_business_id"
+    t.index ["published_by_id"], name: "index_policies_on_published_by_id"
+    t.index ["src_id"], name: "index_policies_on_src_id"
+    t.index ["updated_by_id"], name: "index_policies_on_updated_by_id"
+    t.index ["user_id"], name: "index_policies_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -98,6 +141,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_171633) do
     t.integer "experience"
     t.boolean "show_full_name"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "risk_policies", force: :cascade do |t|
+    t.bigint "risk_id"
+    t.bigint "policy_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["policy_id"], name: "index_risk_policies_on_policy_id"
+    t.index ["risk_id"], name: "index_risk_policies_on_risk_id"
+  end
+
+  create_table "risks", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id"
+    t.integer "updated_by_id"
+    t.integer "business_id"
+    t.string "impact"
+    t.string "likelihood"
+    t.string "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_risks_on_business_id"
+    t.index ["updated_by_id"], name: "index_risks_on_updated_by_id"
+    t.index ["user_id"], name: "index_risks_on_user_id"
   end
 
   create_table "share_exams", force: :cascade do |t|

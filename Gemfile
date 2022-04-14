@@ -84,6 +84,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'shoulda-matchers', '~> 5.0'
   gem "pry"
+  gem 'factory_bot'
 end
 
 group :development do

@@ -11,7 +11,6 @@ class Api::ShareExamsController < Api::BaseController
     share_exam = @exam.share_exams.create(share_exam_params.merge(user: current_user, updated_by: current_user))
 
     if share_exam.save
-      # send email
       render json: { share_exam: share_exam }, status: :created
     else
       render json: { errors: share_exam.errors }, status: :unprocessable_entity

@@ -3,15 +3,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     build_resource(sign_up_params)
-
+    invited_employee = false
+    if params[:invite_hash].present?
+      invited_employee = Employee.find_by_invite_hash(params[:invite_hash])
+      return render json: { error: "Employee doesn't exist" } if invited_employee.nil?
+      return render json: { error: "Employee is already registered" } if invited_employee.user_id.present?
+    end
     resource.save
     yield resource if block_given?
     if resource.persisted?
-      resource.build_business.save if resource.kind == "employee"
+      if resource.kind == "employee"
+        if invited_employee
+          invited_employee.update(user_id: resource.id)
+        else
+          resource.build_business.save
+          resource.build_employee(first_name: resource.profile.first_name,
+                                  last_name: resource.profile.last_name,
+                                  invite_email: resource.email,
+                                  start_date: Time.zone.now,
+                                  role: "admin",
+                                  user_id: resource.id,
+                                  active: true,
+                                  business_id: resource.business.id).save
+        end
+      end
       resource.update!(otp_secret: User.generate_otp_secret)
       resource.send_otp
       set_flash_message! :notice, :signed_up
-      # sign_up(resource_name, resource)
       respond_with resource, location: after_sign_up_path_for(resource)
     else
       clean_up_passwords resource

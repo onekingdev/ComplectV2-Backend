@@ -260,6 +260,296 @@ paths:
                   type: string
               required:
               - filename
+  "/api/policies":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Policy list
+      tags:
+      - Policies
+      responses:
+        '200':
+          description: return policy list
+    post:
+      summary: Creates a policy
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '201':
+          description: created policy
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+              required:
+              - name
+  "/api/policies/update_position":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    post:
+      summary: update position
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '200':
+          description: updated position
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                positions:
+                  type: array
+  "/api/policies/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Retrieves a policy
+      tags:
+      - Policies
+      responses:
+        '200':
+          description: policy found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  status:
+                    type: string
+        '404':
+          description: policy not found
+    put:
+      summary: Update policy
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '200':
+          description: updated policy
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+    delete:
+      summary: Delete policy
+      tags:
+      - Policies
+      responses:
+        '200':
+          description: deleted policy
+  "/api/policies/{id}/published":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    post:
+      summary: Published Policy
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '200':
+          description: published policy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+  "/api/policies/{id}/archived":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    post:
+      summary: Archived/Unarchived policy
+      tags:
+      - Policies
+      parameters: []
+      responses:
+        '200':
+          description: archived policy
+        '422':
+          description: can not archived
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                archived:
+                  type: boolean
+              description: Set true for archived and false for unarchived
+  "/api/risks":
+    parameters:
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Risk list
+      tags:
+      - Risks
+      responses:
+        '200':
+          description: return risk list
+    post:
+      summary: Creates a risk
+      tags:
+      - Risks
+      parameters: []
+      responses:
+        '201':
+          description: created risk
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                impact:
+                  type: string
+                likelihood:
+                  type: string
+                level:
+                  type: string
+                policy_ids:
+                  type: array
+              required:
+              - name
+              - impact
+              - likelihood
+              - level
+  "/api/risks/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    - name: Authorization
+      in: header
+      schema:
+        type: string
+    get:
+      summary: Retrieves a risk
+      tags:
+      - Risks
+      responses:
+        '200':
+          description: risk found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  impact:
+                    type: string
+                  likelihood:
+                    type: string
+                  level:
+                    type: string
+        '404':
+          description: risk not found
+    put:
+      summary: Update risk
+      tags:
+      - Risks
+      parameters: []
+      responses:
+        '200':
+          description: updated risk
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                impact:
+                  type: string
+                likelihood:
+                  type: string
+                level:
+                  type: string
+    delete:
+      summary: Delete risk
+      tags:
+      - Risks
+      responses:
+        '200':
+          description: deleted risk
   "/api/exams/{exam_id}/share_exams":
     parameters:
     - name: exam_id

@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Exam, type: :model do
+  let(:user) { create(:user) }
+  let(:exam) { create(:exam) }
+
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should belong_to(:business) }
     it { should belong_to(:updated_by).class_name('User') }
     it { should have_many(:exam_requests) }
     it { should have_many(:share_exams) }
@@ -36,15 +40,6 @@ RSpec.describe Exam, type: :model do
   end
 
   it 'auto generate share_uuid after create' do
-    user = User.create(email: 'example@gmail.com', password: '12345678')
-    exam = Exam.create(
-      name: 'Ruby',
-      starts_on: Time.current + 1.day,
-      ends_on: Time.current + 2.days,
-      user: user,
-      updated_by: user
-    )
-
     expect(exam.share_uuid).not_to be_nil
   end
 end
