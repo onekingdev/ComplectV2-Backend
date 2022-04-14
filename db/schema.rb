@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_171633) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_171633) do
     t.string "stripe_customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "invite_email"
+    t.datetime "start_date"
+    t.datetime "disabled_at"
+    t.string "disabled_reason"
+    t.text "additional_reason"
+    t.boolean "access_person"
+    t.string "role"
+    t.boolean "active"
+    t.string "invite_hash"
+    t.bigint "user_id"
+    t.bigint "business_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_employees_on_business_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
   create_table "exam_requests", force: :cascade do |t|

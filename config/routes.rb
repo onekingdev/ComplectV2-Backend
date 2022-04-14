@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     patch "/business" => 'businesses#update'
     get "/business" => 'businesses#show'
     get "/regulatory_bodies" => 'regulatory_bodies#index'
+    resources :employees, only: [:index, :create, :update, :destroy]
     resources :exams, except: [:edit] do
       post 'completed', on: :member
       resources :share_exams, only: [:index, :create, :destroy]

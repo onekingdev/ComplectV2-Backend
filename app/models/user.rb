@@ -11,9 +11,11 @@ class User < ApplicationRecord
   has_many :share_exams
   has_one :profile, dependent: :destroy
   has_one :business
+  has_one :employee, dependent: :destroy
   accepts_nested_attributes_for :profile
 
   validates :kind, presence: true
+  validates :profile, presence: true
 
   enum kind: { specialist: 'specialist', employee: 'employee' }
 
