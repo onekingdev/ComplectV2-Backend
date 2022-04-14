@@ -9,7 +9,8 @@ class PublishPolicyService
 
   def process
     Policy.transaction do
-      policy.update(policy_params.merge(status: Policy.statuses['published'], published_at: Time.current, updated_by: user, published_by: user))
+      policy.update(policy_params.merge(status: Policy.statuses['published'], published_at: Time.current,
+                                        updated_by: user, published_by: user))
       create_version
     end
   end
