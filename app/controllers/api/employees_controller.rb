@@ -6,7 +6,7 @@ class Api::EmployeesController < Api::BaseController
   end
 
   def create
-    employee = @business.employees.build(employee_params.merge(invite_hash: SecureRandom.uuid))
+    employee = @business.employees.build(employee_params.merge(invite_hash: SecureRandom.uuid, active: true))
     if employee.save
       puts "**** Invite hash: ****\n#{employee.invite_hash}\n**********************" if Rails.env == "development"
       EmployeeMailer.send_invite(employee.invite_email, employee.invite_hash) if Rails.env != "development"
@@ -18,7 +18,9 @@ class Api::EmployeesController < Api::BaseController
 
   def update
     employee = @business.employees.find(params[:id])
+    was_active = employee.active?
     if employee.update(employee_params)
+      employee.disable if was_active && !employee.active
       render json: employee, serializer: EmployeeSerializer
     else
       render json: { errors: employee.errors }, status: :unprocessable_entity

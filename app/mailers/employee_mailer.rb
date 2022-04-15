@@ -10,4 +10,15 @@ class EmployeeMailer < ApplicationMailer
       }
     )
   end
+
+  def send_disabled(email)
+    mail(
+      to: email,
+      template_id: ENV.fetch('POSTMARK_TEMPLATE_ID'),
+      template_model: {
+        subject: 'Your account has been disabled',
+        message_html: render_to_string(template: 'employee_mailer/send_disabled.html.slim')
+      }
+    )
+  end
 end
