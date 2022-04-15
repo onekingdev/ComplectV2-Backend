@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "Complect <#{ENV.fetch('DEFAULT_MAIL_FROM')}>"
   layout "mailer"
   attr_reader :postmark
 
