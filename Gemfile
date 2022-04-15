@@ -9,6 +9,9 @@ gem 'postmark-rails'
 # db
 gem 'pg'
 
+# slim templates for mail
+gem 'slim-rails'
+
 # serializers
 gem 'active_model_serializers'
 
