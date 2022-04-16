@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_14_160533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,13 +27,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
     t.string "city"
     t.string "state"
     t.string "zipcode"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.jsonb "logo_data"
     t.integer "payment_method_id"
     t.string "stripe_customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -123,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.string "time_zone"
     t.string "address"
     t.string "apt_unit"
@@ -138,9 +137,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_215519) do
     t.jsonb "file_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "experience"
+    t.string "experience"
     t.boolean "show_full_name"
-    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "risk_policies", force: :cascade do |t|
