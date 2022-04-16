@@ -1,5 +1,6 @@
 class Api::EmployeesController < Api::BaseController
   before_action :get_business
+  before_action { authorize_action(EmployeesPolicy) }
 
   def index
     render json: @business.employees, each_serializer: EmployeeSerializer

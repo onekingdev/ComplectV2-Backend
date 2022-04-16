@@ -3,8 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.1"
 
+# mail
+gem 'postmark-rails'
+
 # db
 gem 'pg'
+
+# slim templates for mail
+gem 'slim-rails'
 
 # serializers
 gem 'active_model_serializers'
@@ -91,3 +97,5 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem "pundit", "~> 2.2"
