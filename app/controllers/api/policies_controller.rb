@@ -33,7 +33,8 @@ class Api::PoliciesController < Api::BaseController
   end
 
   def archived
-    render json: { error: 'Can not process' }, status: :unprocessable_entity and return if params[:archived].nil?
+    render json: { error: I18n.t("policies.errors.unable_to_process") },
+           status: :unprocessable_entity and return if params[:archived].nil?
 
     policy = ArchivedPolicyService.new(params[:archived], @policy, current_user).process
 
@@ -60,7 +61,7 @@ class Api::PoliciesController < Api::BaseController
     if @policy.destroy
       render json: { policy: @policy }
     else
-      render json: { error: 'Can not delete' }, status: :unprocessable_entity
+      render json: { error: I18n.t("policies.errors.unable_to_destroy") }, status: :unprocessable_entity
     end
   end
 

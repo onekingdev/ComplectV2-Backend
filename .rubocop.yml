@@ -204,7 +204,8 @@ Metrics/ClassLength:
 
 Metrics/LineLength:
   Enabled: true
-
+  Max: 130
+  
 Metrics/AbcSize:
   Enabled: false
 

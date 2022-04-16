@@ -40,7 +40,7 @@ class Api::ExamsController < Api::BaseController
     if @exam.destroy
       render json: { exam: @exam }
     else
-      render json: { error: 'Can not delete' }, status: :unprocessable_entity
+      render json: { error: I18n.t("exams.errors.unable_to_destroy") }, status: :unprocessable_entity
     end
   end
 

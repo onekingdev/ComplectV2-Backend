@@ -1,33 +1,45 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
+  otp_mailer:
+    send_otp:
+      header: "Thank you for verifying your identity. Your verification code is:"
+      footer: "Your account security is our top priority. If you did not request this code, please ignore this email."
+  employee_mailer:
+    send_invite:
+      subject: "You have been invited to join organization"
+      body: "Follow this link to join organization"
+    send_disabled:
+      subject: "Your account has been disabled"
+      body: "Your account has been disabled."
+  users:
+    actions:
+      register_success: "Signed up."
+      register_failed: "Sign up failure."
+      signed_out: "Signed out."
+    errors:
+      wrong_password: "Wrong password"
+      missing_otp: "Missing OTP"
+      sign_out: "Sign out failure."
+  employees:
+    errors:
+      disabled: "Account is disabled"
+      user_assigned: "Employee has already assigned User"
+      not_found: "Employee doesn't exist"
+    actions:
+      removed: "Removed employee"
+  exams:
+    errors:
+      unable_to_destroy: "Can not delete"
+  policies:
+    errors:
+      unable_to_process: "Can not process"
+      unable_to_destroy: "Can not delete"
+  risks:
+    errors:
+      unable_to_destroy: "Can not delete"
+  share_exams:
+    errors:
+      unable_to_destroy: "Can not delete"
+  work_experiences:
+    errors:
+      unable_to_destroy: "Can not delete"
