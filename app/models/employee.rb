@@ -7,4 +7,8 @@ class Employee < ApplicationRecord
   validates :first_name, :last_name, :invite_email, :role, presence: true
 
   enum role: { basic: 'basic', admin: 'admin', trusted: 'trusted' }
+
+  def disable
+    EmployeeMailer.send_disabled(user ? user.email : invite_email) if Rails.env != "development"
+  end
 end

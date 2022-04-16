@@ -9,6 +9,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     user = User.find_first_by_auth_conditions(email: params[:user][:email])
     return render json: { error: "Wrong password" } unless user.valid_password?(params[:user][:password])
+    return render json: { error: "Account is disabled" } if user.employee && !user.employee.active?
 
     user.update!(otp_secret: User.generate_otp_secret) if user.otp_secret.nil?
     if params[:user][:otp_attempt].blank?
@@ -16,7 +17,6 @@ class Users::SessionsController < Devise::SessionsController
       return render json: { error: "Missing OTP" }
     end
     self.resource = warden.authenticate!(auth_options)
-    # set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     yield resource if block_given?
     respond_with resource, location: after_sign_in_path_for(resource)
