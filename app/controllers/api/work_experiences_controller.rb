@@ -32,7 +32,7 @@ class Api::WorkExperiencesController < Api::BaseController
     if @work_experience.destroy
       render json: { work_experience: @work_experience }
     else
-      render json: { error: 'Can not delete' }, status: :unprocessable_entity
+      render json: { error: I18n.t("work_experiences.errors.unable_to_destroy") }, status: :unprocessable_entity
     end
   end
 

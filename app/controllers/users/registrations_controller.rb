@@ -6,9 +6,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     invited_employee = false
     if params[:invite_hash].present?
       invited_employee = Employee.find_by_invite_hash(params[:invite_hash])
-      return render json: { error: "Employee doesn't exist" } if invited_employee.nil?
-      return render json: { error: "Employee is already registered" } if invited_employee.user_id.present?
-      return render json: { error: "Account is disabled" } unless invited_employee.active?
+      return render json: { error: I18n.t("employees.errors.not_found") } if invited_employee.nil?
+      return render json: { error: I18n.t("employees.errors.user_assigned") } if invited_employee.user_id.present?
+      return render json: { error: I18n.t("employees.errors.disabled") } unless invited_employee.active?
     end
     resource.save
     yield resource if block_given?
@@ -46,10 +46,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    render json: { message: 'Signed up.' }
+    render json: { message: I18n.t("users.actions.register_success") }
   end
 
   def register_failed
-    render json: { message: "Sign up failure." }
+    render json: { message: I18n.t("users.actions.register_failed") }
   end
 end

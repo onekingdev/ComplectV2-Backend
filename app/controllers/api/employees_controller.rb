@@ -30,10 +30,10 @@ class Api::EmployeesController < Api::BaseController
 
   def destroy
     employee = @business.employees.find(params[:id])
-    return render json: { error: "Employee has already assigned User" } if employee.user.present?
+    return render json: { error: I18n.t("employees.errors.user_assigned") } if employee.user.present?
 
     if employee.destroy
-      render json: { message: 'Removed employee' }
+      render json: { message: I18n.t("employees.actions.removed") }
     else
       render json: { errors: employee.errors }, status: :unprocessable_entity
     end

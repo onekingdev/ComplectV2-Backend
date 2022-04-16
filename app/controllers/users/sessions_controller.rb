@@ -2,19 +2,15 @@ class Users::SessionsController < Devise::SessionsController
   respond_to :json
   # include Devise::Controllers::Rails7ApiMode
 
-  def new
-    render json: { message: "Please sign in." }
-  end
-
   def create
     user = User.find_first_by_auth_conditions(email: params[:user][:email])
-    return render json: { error: "Wrong password" } unless user.valid_password?(params[:user][:password])
-    return render json: { error: "Account is disabled" } if user.employee && !user.employee.active?
+    return render json: { error: I18n.t("users.errors.wrong_password") } unless user.valid_password?(params[:user][:password])
+    return render json: { error: I18n.t("employees.errors.disabled") } if user.employee && !user.employee.active?
 
     user.update!(otp_secret: User.generate_otp_secret) if user.otp_secret.nil?
     if params[:user][:otp_attempt].blank?
       user.send_otp
-      return render json: { error: "Missing OTP" }
+      return render json: { error: I18n.t("users.errors.missing_otp") }
     end
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
@@ -33,11 +29,11 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def log_out_success
-    render json: { message: "Signed out." }, status: :ok
+    render json: { message: I18n.t("users.actions.signed_out") }, status: :ok
   end
 
   def log_out_failure
-    render json: { message: "Sign out failure." }, status: :unauthorized
+    render json: { message: I18n.t("users.errors.sign_out") }, status: :unauthorized
   end
 
   protected

@@ -5,7 +5,7 @@ class EmployeeMailer < ApplicationMailer
       to: email,
       template_id: ENV.fetch('POSTMARK_TEMPLATE_ID'),
       template_model: {
-        subject: 'You have been invited to join organization',
+        subject: I18n.t("employee_mailer.send_invite.subject"),
         message_html: render_to_string(template: 'employee_mailer/send_invite')
       }
     )
@@ -16,7 +16,7 @@ class EmployeeMailer < ApplicationMailer
       to: email,
       template_id: ENV.fetch('POSTMARK_TEMPLATE_ID'),
       template_model: {
-        subject: 'Your account has been disabled',
+        subject: I18n.t("employee_mailer.send_disabled.subject"),
         message_html: render_to_string(template: 'employee_mailer/send_disabled.html.slim')
       }
     )

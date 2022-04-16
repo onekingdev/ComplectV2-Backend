@@ -31,7 +31,7 @@ class Api::RisksController < Api::BaseController
     if @risk.destroy
       render json: { risk: @risk }
     else
-      render json: { error: 'Can not delete' }, status: :unprocessable_entity
+      render json: { error: I18n.t("risks.errors.unable_to_destroy") }, status: :unprocessable_entity
     end
   end
 

@@ -21,7 +21,7 @@ class Api::ShareExamsController < Api::BaseController
     if @share_exam.destroy
       render json: { share_exam: @share_exam }
     else
-      render json: { error: 'Can not delete' }, status: :unprocessable_entity
+      render json: { error: I18n.t("share_exams.errors.unable_to_destroy") }, status: :unprocessable_entity
     end
   end
 

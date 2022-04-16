@@ -11,6 +11,6 @@ class Api::BaseController < ApplicationController
   private
 
   def disable_employee
-    return render json: { error: "Account is disabled" } if current_user.employee && !current_user.employee.active?
+    return render json: { error: I18n.t("employees.errors.disabled") } if current_user.employee && !current_user.employee.active?
   end
 end
