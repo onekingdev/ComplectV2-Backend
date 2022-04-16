@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       invited_employee = Employee.find_by_invite_hash(params[:invite_hash])
       return render json: { error: "Employee doesn't exist" } if invited_employee.nil?
       return render json: { error: "Employee is already registered" } if invited_employee.user_id.present?
+      return render json: { error: "Account is disabled" } unless invited_employee.active?
     end
     resource.save
     yield resource if block_given?
