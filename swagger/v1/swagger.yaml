@@ -731,14 +731,96 @@ paths:
       responses:
         '200':
           description: deleted work_experience
+  "/users":
+    post:
+      tags:
+      - Users
+      description: "Register"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    kind:
+                      type: string
+                    profile_attributes:
+                      type: object
+                      properties:
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+  "/users/password":
+    post:
+      tags:
+      - Users
+      description: "Request password reset"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: "string"
+    patch:
+      tags:
+      - Users
+      description: "Apply password reset"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: "string"
+                    reset_password_token:
+                      type: "string"
+                    password:
+                      type: "string"
+  "/users/sign_in":
+    post:
+      tags:
+      - Users
+      description: "Sign in"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    otp_attempt:
+                      type: string
   "/api/profile":
     get:
       tags:
-      - Sign up, sign in and onboarding
+      - Profiles
       description: "Retrieve existing profile data"
     patch:
       tags:
-      - Sign up, sign in and onboarding
+      - Profiles
       description: "Update profile (onboarding stage for specialist, or through settings tab)"
       requestBody:
         content:
@@ -778,7 +860,7 @@ paths:
                     file:
                       type: string
                     experience:
-                      type: string
+                      type: integer
                     show_full_name:
                       type: boolean
                     regulatory_body_list:
@@ -786,11 +868,11 @@ paths:
   "/api/business":
     get:
       tags:
-      - Sign up, sign in and onboarding
+      - Profiles
       description: "Retrieve existing business data"
     patch:
       tags:
-      - Sign up, sign in and onboarding
+      - Profiles
       description: "Update business (onboarding stage for employee, or through settings tab)"
       requestBody:
         content:
@@ -827,6 +909,11 @@ paths:
                       type: string
                     logo:
                       type: string
+  "/api/regulatory_bodies":
+    get:
+      tags:
+      - Tags
+      description: "Get regulatory bodies tag list for profiles"
 servers:
 - url: http://{defaultHost}
   variables:
